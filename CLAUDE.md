@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-An interactive world map visualizing the 32 nations that reached the FIFA World Cup 2026 Round of 32. Countries are color-coded by squad market value; clicking a country opens a side panel with group-stage results, full knockout-bracket progression (Round of 32 through the Final), W/D/L record, a squad-value bar, top 3 players by value, and country-fact categories. The app itself is one HTML file that fetches its match data from a sibling `data.json`.
+An interactive world map visualizing the 32 nations that reached the FIFA World Cup 2026 Round of 32. Countries are color-coded by **qualification stage reached** (Round of 32 exit through Champion); clicking a country opens a side panel with group-stage results, full knockout-bracket progression (Round of 32 through the Final), W/D/L record, a squad-value bar with a star rating, top 3 players by value, and country-fact categories. The app itself is one HTML file that fetches its match data from a sibling `data.json`. Visual identity is a playful "sticker album" theme (turf-green/gold/pink/sky palette, emoji result stamps, star ratings) applied 2026-07-06 — see README's Design Tokens for the full palette.
 
 This is a design-reference deliverable, not a build-pipeline app — there is no `package.json` and no test suite (the one Node script, used only by the GitHub Actions workflow, has no dependencies beyond built-ins). `README.md` is a detailed handoff doc for the next engineer/agent picking this up; read it before making changes.
 
@@ -42,24 +42,24 @@ If the app logic itself ever needs to change again (not just match data), re-run
 - `TEAMS` / `ISO_MAP` — class fields, default to `{}` and populated from `data.json` in `componentDidMount()`. `TEAMS` is keyed by 3-letter code (e.g. `ARG`, `USA`); fields: `name`, `flag`, `iso2`, `group`, `pos`, `w/d/l`, `gf/ga`, `val`/`vLabel` (squad value), `status` (the stage a team has advanced to — `"R32"`/`"R16"`/`"QF"`/`"SF"`/`"F"` — or `"OUT"` or `"CHAMPION"`), `eliminatedIn` (set only when `status === "OUT"`, the stage they lost in), `games` (group stage), `knockout` (array of `{stage, opp, gf, ga, note?}`, one entry per knockout round played, in order), `players` (top 3 by value), `facts` (capital/geo/history/society/cuisine). `ISO_MAP` maps numeric TopoJSON country IDs to team codes.
 - `componentDidMount()` — fetches `data.json` and the world-atlas TopoJSON in parallel (`Promise.all`), assigns `this.TEAMS`/`this.ISO_MAP` from the former, then calls `renderMap()`.
 - `renderMap()` — draws/updates the D3 map, including the special-case Cape Verde marker (islands too small for the 110m atlas — rendered as an explicit SVG circle at `[-24, 16]`).
-- `renderVals()` — renders the squad-value bar chart and side-panel fields, including mapping `d.knockout` into a `knockoutGames` array (via `STAGE_LABELS`) that the template renders as an `sc-for` list under "KNOCKOUT STAGE", and deriving the top status badge (`badgeBg`/`badgeColor`/`badgeLabel`) from `status`/`eliminatedIn` — green "STAGE · ADVANCING", red "ELIMINATED · STAGE", or gold "WORLD CHAMPIONS".
-- `tierColor`/`hoverColor` — map squad value (`val`, in millions EUR) to the 4-tier fill colors in README's Design Tokens table.
+- `renderVals()` — renders the squad-value bar chart (plus a `valueStars` rating derived from the same bracket as `tierColor`) and side-panel fields, including mapping `d.knockout` into a `knockoutGames` array (via `STAGE_LABELS`) that the template renders as an `sc-for` list under "KNOCKOUT STAGE", and deriving the top status badge (`badgeBg`/`badgeColor`/`badgeLabel`) from `status`/`eliminatedIn` — green "✅ STAGE · ADVANCING", pink "❌ ELIMINATED · STAGE", or gold "🏆 WORLD CHAMPIONS".
+- `furthestStage(team)` — returns the furthest stage a team actually reached: `team.eliminatedIn` if `status === 'OUT'`, otherwise `team.status` directly. This is the value the **map** colors by — don't color the map by `status` alone, since every eliminated team shares `status: 'OUT'` regardless of which round knocked them out (that was a bug, fixed 2026-07-06).
+- `stageColor`/`stageHoverColor` — map a `furthestStage()` result to the map's stage-tier fill colors (see README's Design Tokens table). Used for country fills, the Cape Verde marker, and hover states.
+- `tierColor`/`hoverColor` — map squad value (`val`, in millions EUR) to a *separate* 4-tier amber/bronze ramp, used only for the squad-value bar, top players, and facts accent color in the side panel — not the map.
 
-## Design tokens (must be preserved — treat as high-fidelity, do not restyle)
+## Design tokens (current baseline as of the 2026-07-06 redesign — see README for the full rationale)
 
 | Token | Value |
 |---|---|
-| Background | `#06090f` |
-| Map ocean | `#0c1828` |
-| Country (non-qualifier) | `#101e30` |
-| Gold accent | `#f0b840` |
-| Tier 1 fill (≥€500M) | `#f0b840` |
-| Tier 2 fill (≥€200M) | `#d07c10` |
-| Tier 3 fill (≥€100M) | `#a85c18` |
-| Tier 4 fill (<€100M) | `#6e3e18` |
-| Selected country | `#ffd700` |
-| Win / Draw / Loss | `#4ade80` / `#facc15` / `#f87171` |
-| Fonts | Barlow Condensed (headings), Barlow (body) — Google Fonts, bundled inline |
+| Background / map ocean | `#0d1b14` |
+| Country (non-qualifier) | `#16261f` |
+| Map fill — by furthest stage reached | R32 out `#3e6b52` · R16 `#5ad0f0` · QF `#ff7fa3` · SF `#ff8c61` · Final/Champion `#ffd666`/`#ffee8c` |
+| Selected country | `#ffffff` fill, dashed `#ffd666` outline |
+| Squad-value ramp (side panel only) | ≥€500M `#ffd666` · ≥€200M `#f0a83d` · ≥€100M `#c97c2e` · <€100M `#8a5a28` |
+| Win / Draw / Loss | `#3ddc84` (✅) / `#ffd666` (🤝) / `#ff7fa3` (❌) |
+| Fonts | Baloo 2 (hero title, country name), Barlow Condensed (labels/data), Barlow (body) — Google Fonts, bundled inline |
+
+Treat this as the current high-fidelity baseline — don't restyle incidentally while fixing something else. A deliberate restyle is a distinct, explicit request.
 
 ## External dependencies
 
@@ -80,4 +80,4 @@ For ongoing updates during the tournament, `scripts/update-data.js` + `.github/w
 
 **Stage-name mapping is only partially confirmed.** `R32 = 'LAST_32'` and `R16 = 'LAST_16'` were confirmed via live diagnostic runs on 2026-07-06 — notably, football-data.org's naming does NOT follow the pattern its own general docs suggest (`ROUND_OF_32`/`SEMI_FINALS`), and an intermediate guess of `LAST_16` for Round of 32 was briefly wrong and shipped incorrect data for 8 teams before being caught. `QF`/`SF`/`F` candidate names in `STAGE_API_NAMES` are still unconfirmed guesses. The script logs a per-stage match-count diagnostic every run specifically so this can be verified with real numbers instead of guesswork — before trusting a newly-reached round's data, check that diagnostic log for a plausible match count at that stage (e.g. 8 finished matches for a first confirmed Quarterfinal round) rather than assuming the guessed name was right.
 
-If the app *logic* needs to change (not just data), re-export a fresh Standalone HTML from Claude Design and re-run the extraction pass described above to regenerate `data.json` and re-wire the fetch — don't hand-edit the JSON-escaped template text directly.
+If the app *logic* or *design* needs to change (not just match data), use the in-place bundle-editing procedure described above (`json.loads`/edit/`json.dumps`/escape `</`) — this is how the 2026-07-06 sticker-album redesign (palette, map-coloring logic, new Baloo 2 font resource) was applied, and it preserves `data.json`/the fetch wiring untouched. Re-exporting a fresh Standalone HTML from Claude Design is only needed if you're starting from a new Claude Design source file, since that would blow away the `data.json` fetch wiring and require re-running the whole extraction pass.
