@@ -5,9 +5,15 @@
 // Requires FOOTBALL_DATA_API_KEY in the environment. Run with: node scripts/update-data.js
 //
 // NOTE: football-data.org's `stage` value for the World Cup 2026 Round of 32
-// was confirmed via a live run (2026-07-06) to be `LAST_16`, not
-// `LAST_32`/`ROUND_OF_32` as originally guessed with no API key available --
-// if their naming changes again, check the "Unrecognized stage values" log.
+// is `LAST_32` -- confirmed 2026-07-06 via a diagnostic run showing exactly
+// 16 FINISHED LAST_32 matches (the right count for 32 teams) vs. 4 FINISHED
+// LAST_16 matches (the *next* stage, Round of 16, partially played so far).
+// An earlier version of this file briefly had this backwards (set to
+// ['LAST_16']) after a single ambiguous run, which incorrectly wrote 8 real
+// teams' r32Game/status from Round-of-16 results instead of Round-of-32 --
+// fixed by this commit. If football-data.org's naming changes again, check
+// the "Unrecognized stage values" log and the per-stage match-count
+// diagnostic below before changing this.
 
 const fs = require('fs');
 const path = require('path');
@@ -17,7 +23,7 @@ const COMPETITION_CODE = 'WC'; // football-data.org code for FIFA World Cup (con
 const API_BASE = 'https://api.football-data.org/v4';
 
 const GROUP_STAGE_NAMES = ['GROUP_STAGE'];
-const R32_STAGE_NAMES = ['LAST_16'];
+const R32_STAGE_NAMES = ['LAST_32'];
 
 // Our TEAMS keys vs. football-data.org's team `name`/`shortName` don't always
 // match by naive substring -- seed known mismatches here. Left side is our
