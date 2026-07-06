@@ -6,35 +6,37 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A single-file interactive world map visualizing the 32 nations that reached the FIFA World Cup 2026 Round of 32. Countries are color-coded by squad market value; clicking a country opens a side panel with group-stage results, the Round of 32 match, W/D/L record, a squad-value bar, top 3 players by value, and country-fact categories.
 
-This is a design-reference deliverable, not a running app with a build pipeline — there is no `package.json`, no git repo, and no test suite. `README.md` is a detailed handoff doc for the next engineer/agent picking this up; read it before making changes, but verify its claims against the actual HTML (see caveat below).
+This is a design-reference deliverable, not a running app with a build pipeline — there is no `package.json` and no test suite. `README.md` is a detailed handoff doc for the next engineer/agent picking this up; read it before making changes.
 
-**This file no longer renders in the Claude Design preview tool** — since data now comes from a `fetch('./data.json')` call, it must be viewed via a real local HTTP server (`python -m http.server` in this folder, then open the HTML URL) or a real deployment. See `README.md`'s "Local Preview" section.
+Live deployment: `https://sapnasudhir.github.io/learn-fifa-countries/FIFA%202026%20Round%20of%2032%20Standalone.html` (GitHub Pages, `main` branch, root path — note the repo root itself has no `index.html`, so the bare root URL 404s by design).
 
 ## Files
 
-- `FIFA 2026 Round of 32.html` — the app shell: markup, styles, and logic. Match data is no longer inline — it's fetched from `data.json` at startup.
-- `data.json` — all match/team data (`meta`, `teams`, `isoMap`), extracted from the HTML. Edit this file to update results; no HTML changes needed.
-- `README.md` — handoff doc: design tokens, data schema, and remaining follow-up task.
+- `FIFA 2026 Round of 32 Standalone.html` — the entire app. This is the only file in the project; it's committed and deployed as-is, with no build step.
+- `README.md` — handoff doc: design tokens, deployment, and the data-update situation.
 
-## Important caveat: this is not plain D3/vanilla JS
+## How this file is structured: a self-unpacking bundle
 
-The README describes the file as "no framework, no build step," but the markup actually uses a custom component DSL:
-- `<x-dc>` root wrapper, `<helmet>` for head content
-- Template bindings (`{{ zoomIn }}`, `{{ tierColor }}`) and directives (`sc-if`, `sc-for`)
-- `<script src="./support.js">` — a runtime this file depends on to interpret the DSL, but `support.js` is **not present in this directory** and confirmed 404s when served locally (checked via `python -m http.server`)
-- The actual logic lives in `<script type="text/x-dc" data-dc-script">` (starting ~line 193) as `class Component extends DCLogic { ... }`
+This is a Claude Design "Standalone HTML" export, not a hand-written static page. Structurally:
 
-Consequence: the HTML file will **not** render standalone by double-clicking it in a browser — it needs the `support.js` runtime supplied by whatever tool produced it. Don't assume "open in browser" works without that dependency; if you need a truly standalone version, that conversion (stripping the DSL to vanilla JS/D3) is real work, not a given.
+- A visible `<div id="__bundler_thumbnail">` SVG placeholder and `Unpacking...` status text show briefly on load.
+- A real `<script>` (not a custom type — this one actually executes) reads two sibling script tags: `script[type="__bundler/manifest"]` (a JSON object mapping resource UUIDs to `{mime, compressed, data}` blobs — fonts, images, and the app's own JS runtime) and `script[type="__bundler/template"]` (the real page's HTML, JSON-encoded as a string, with UUID placeholders standing in for resource URLs).
+- The bootstrap script converts each manifest entry to a blob URL, substitutes the placeholders into the template string, and injects the reconstructed page into the document, replacing the loading placeholder.
 
-**Unresolved:** it's not yet established where `support.js` is supposed to come from — whether it was ever meant to be checked into this folder, or whether some other tool/CDN normally supplies it. Until that's answered, even serving this file over a real local HTTP server may not fully render the DSL-driven markup/bindings — data.json loading correctly (confirmed working) is necessary but may not be sufficient for a full visual render. Don't assume a local-server preview is fully verified just because the HTTP responses are 200s.
+The reconstructed page is a `class Component extends DCLogic` app using a custom template DSL (`<x-dc>` root wrapper, `{{ }}` bindings, `sc-if`/`sc-for` directives) — confirmed via string search that this exact class/pattern is embedded in the template. An **earlier version** of this file referenced its runtime via `<script src="./support.js">`, a relative path that was never actually present, so it only ever rendered inside the Claude Design preview tool. This Standalone export fixes that by bundling the runtime itself as one of the manifest resources instead of a missing relative file — confirmed working when served over GitHub Pages (see README's Deployment section).
 
-## Architecture of the Component class (in the `data-dc-script` block)
+**Practical implication:** don't try to hand-edit the app logic or match data directly in this file. It's JSON-escaped text nested inside JSON-escaped text (the template string inside the manifest/template JSON), not directly editable source. See README's "Updating Data" section for the actual update path.
+
+## Architecture of the embedded Component class
+
+(Reconstructed from what's visible in the template string — same shape as the earlier non-bundled version of this design.)
 
 - `state = { selected: null }` — currently selected country drives the side panel.
-- `TEAMS` / `ISO_MAP` / `META` — start empty (`{}`), populated by `componentDidMount()` from `data.json`. `TEAMS` is per-country data keyed by 3-letter code (e.g. `ARG`, `AUS`); fields: `name`, `flag`, `iso2`, `group`, `pos`, `w/d/l`, `gf/ga`, `val`/`vLabel` (squad value), `status` (`"R16"` or `"OUT"`), `games` (group stage), `r32Game` (Round of 32 result, optional `note` for `"AET"` or pens), `players` (top 3 by value), `facts` (capital/geo/history/society/cuisine). `ISO_MAP` maps numeric TopoJSON country IDs to team codes. `META` holds `highestSquadValueM`/`highestSquadValueLabel` (used for the squad-value bar's 100% reference and footer line) and `lastUpdated`.
-- `componentDidMount()` — `Promise.all`s a `fetch('./data.json')` alongside the world-atlas TopoJSON via D3, assigns `TEAMS`/`ISO_MAP`/`META`, then calls `renderMap()`; wires a resize listener. Requires the page be served over HTTP — `fetch` of a local file fails under `file://`.
+- `TEAMS` / `ISO_MAP` — inline data objects (not fetched — no `data.json` in this project). `TEAMS` is keyed by 3-letter code (e.g. `ARG`, `USA`); fields: `name`, `flag`, `iso2`, `group`, `pos`, `w/d/l`, `gf/ga`, `val`/`vLabel` (squad value), `status` (`"R16"` or `"OUT"`), `games` (group stage), `r32Game` (Round of 32 result, optional `note` for `"AET"` or pens), `players` (top 3 by value), `facts` (capital/geo/history/society/cuisine). `ISO_MAP` maps numeric TopoJSON country IDs to team codes.
+- `componentDidMount()` — loads the world-atlas TopoJSON via D3 (live fetch, see README's External Dependencies), then calls `renderMap()`.
 - `renderMap()` — draws/updates the D3 map, including the special-case Cape Verde marker (islands too small for the 110m atlas — rendered as an explicit SVG circle at `[-24, 16]`).
-- `renderVals()` — renders the squad-value bar chart and side-panel fields, including `highestValueLine` (bound to the footer text, driven by `META.highestSquadValueLabel`).
+- `renderVals()` — renders the squad-value bar chart and side-panel fields.
+- `tierColor`/`hoverColor` — map squad value (`val`, in millions EUR) to the 4-tier fill colors in README's Design Tokens table.
 
 ## Design tokens (must be preserved — treat as high-fidelity, do not restyle)
 
@@ -50,19 +52,18 @@ Consequence: the HTML file will **not** render standalone by double-clicking it 
 | Tier 4 fill (<€100M) | `#6e3e18` |
 | Selected country | `#ffd700` |
 | Win / Draw / Loss | `#4ade80` / `#facc15` / `#f87171` |
-| Fonts | Barlow Condensed (headings), Barlow (body) — Google Fonts |
+| Fonts | Barlow Condensed (headings), Barlow (body) — Google Fonts, bundled inline |
 
-## External dependencies (all loaded at runtime, no npm/bundler)
+## External dependencies
 
-| Resource | Used for |
-|---|---|
-| D3 v7 (`d3js.org`) | Map rendering, zoom, DOM |
-| TopoJSON client (jsDelivr) | Decoding world atlas |
-| World Atlas 110m (jsDelivr) | Country geometries |
-| flagcdn.com | Country flag images (note: England uses `gb-eng`, not `gb`) |
+| Resource | Used for | How it's loaded |
+|---|---|---|
+| World Atlas 110m (jsDelivr) | Country geometries | Live fetch at runtime |
+| flagcdn.com | Country flag images (England uses `gb-eng`, not `gb`) | Live fetch at runtime |
+| D3 v7, TopoJSON client, Google Fonts | Map rendering, zoom, typography | Bundled inline (manifest resources) |
 
-## Planned follow-up work (per README)
+## Updating match data / future automation
 
-1. ~~**Extract data**~~ — done. `TEAMS`/`ISO_MAP` now live in `data.json`, loaded via `fetch` in `componentDidMount`; the squad-value bar and footer line read `META.highestSquadValueM`/`highestSquadValueLabel` instead of a hardcoded `1520`.
-2. **Automate updates** (not yet done): add `.github/workflows/update-data.yml` (cron every 30 min during the tournament) running `scripts/build_data.py`, which fetches results from the football-data.org API (competition ID `2000`) and merges them into `data.json` — preserving `facts`/`players`/`val`/`iso2` fields the API doesn't provide. Requires a `FOOTBALL_DATA_API_KEY` repo secret. See `README.md` for the full script and the `tlaMap` normalization caveat (football-data.org TLA codes can differ from the keys used in `data.json`, e.g. `CPV` vs `CV`).
-3. **Deploy**: push `FIFA 2026 Round of 32.html` (as `index.html`) + `data.json` to GitHub Pages or Vercel so `fetch('./data.json')` actually resolves — see caveat above about `file://` not working.
+There's no `data.json` in this project — match data is inline inside the bundled template (see above). To change results, re-export a fresh Standalone HTML from Claude Design and replace this file; don't hand-edit the JSON-escaped template text.
+
+A previous session extracted `TEAMS`/`ISO_MAP` into a `data.json` and wired a `fetch()`-based loader, intending to set up GitHub Actions automation (football-data.org API) on top of it. That was against the **old, non-bundled** file and was reverted — this bundle format doesn't have an equivalent extraction yet. If automating live score updates comes up again, that extraction needs to be redone against this file's embedded template, not copied from git history as-is.
