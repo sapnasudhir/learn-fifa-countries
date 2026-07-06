@@ -259,7 +259,8 @@
           "ga": 2,
           "note": "AET"
         }
-      ]
+      ],
+      "nextOpponent": "United States"
     },
     "BIH": {
       "name": "Bosnia & Herz.",
@@ -2124,7 +2125,8 @@
           "gf": 2,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "Belgium"
     }
   },
   "ISO_MAP": {

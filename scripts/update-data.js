@@ -181,6 +181,39 @@ function applyLiveData(teams, matches, matchTeam) {
     Object.assign(teams[code], g);
   }
 
+  // Upcoming fixture: scan not-yet-finished knockout matches (SCHEDULED/TIMED/
+  // IN_PLAY) for each team's next opponent. A bracket slot that's still
+  // undetermined comes back as a null homeTeam/awayTeam from the API, not a
+  // placeholder object -- guard both the matchTeam() call and the opponent
+  // name lookup against that, and fall back to 'TBD'. Only the first
+  // upcoming match found per team is kept (a team has at most one scheduled
+  // knockout match at a time).
+  const nextOpponents = new Map(); // code -> opponent display name
+  for (const match of matches) {
+    if (match.status === 'FINISHED') continue;
+    if (GROUP_STAGE_NAMES.includes(match.stage)) continue;
+    if (!stageForApiValue(match.stage)) continue;
+
+    const homeCode = match.homeTeam ? matchTeam(match.homeTeam) : null;
+    const awayCode = match.awayTeam ? matchTeam(match.awayTeam) : null;
+    if (homeCode && teams[homeCode] && !nextOpponents.has(homeCode)) {
+      nextOpponents.set(homeCode, (match.awayTeam && match.awayTeam.name) || 'TBD');
+    }
+    if (awayCode && teams[awayCode] && !nextOpponents.has(awayCode)) {
+      nextOpponents.set(awayCode, (match.homeTeam && match.homeTeam.name) || 'TBD');
+    }
+  }
+  // Self-cleaning: a team with no currently-scheduled knockout match (just
+  // played it, just got eliminated, hasn't reached the bracket yet) loses
+  // any stale nextOpponent from a previous run instead of keeping it.
+  for (const code of Object.keys(teams)) {
+    if (nextOpponents.has(code)) {
+      teams[code].nextOpponent = nextOpponents.get(code);
+    } else {
+      delete teams[code].nextOpponent;
+    }
+  }
+
   for (const [code, stageMap] of knockoutResults) {
     const entries = STAGE_ORDER.filter((s) => stageMap.has(s)).map((s) => stageMap.get(s));
     const furthest = entries[entries.length - 1];
@@ -210,6 +243,7 @@ function applyLiveData(teams, matches, matchTeam) {
   console.log('Diagnostic -- FINISHED matches per stage (only counting ones involving a known team):', Object.fromEntries(stageCounts));
   console.log('Diagnostic -- our team codes with a knockout-stage match this run, by stage:',
     Object.fromEntries(STAGE_ORDER.map((s) => [s, [...knockoutResults].filter(([, m]) => m.has(s)).map(([code]) => code)])));
+  console.log('Diagnostic -- nextOpponent set this run:', Object.fromEntries(nextOpponents));
 }
 
 async function main() {
