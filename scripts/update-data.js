@@ -4,12 +4,10 @@
 //
 // Requires FOOTBALL_DATA_API_KEY in the environment. Run with: node scripts/update-data.js
 //
-// NOTE: the exact `stage` values football-data.org uses for the World Cup
-// 2026's Round of 32 (a new stage introduced for the expanded 48-team
-// format) were not confirmed against a live API response when this script
-// was written (no API key was available). GROUP_STAGE_NAMES / R32_STAGE_NAMES
-// below are best guesses -- check the "Unrecognized stage values" log output
-// on the first real run and adjust if matches are being dropped.
+// NOTE: football-data.org's `stage` value for the World Cup 2026 Round of 32
+// was confirmed via a live run (2026-07-06) to be `LAST_16`, not
+// `LAST_32`/`ROUND_OF_32` as originally guessed with no API key available --
+// if their naming changes again, check the "Unrecognized stage values" log.
 
 const fs = require('fs');
 const path = require('path');
@@ -19,17 +17,16 @@ const COMPETITION_CODE = 'WC'; // football-data.org code for FIFA World Cup (con
 const API_BASE = 'https://api.football-data.org/v4';
 
 const GROUP_STAGE_NAMES = ['GROUP_STAGE'];
-const R32_STAGE_NAMES = ['LAST_32', 'ROUND_OF_32'];
+const R32_STAGE_NAMES = ['LAST_16'];
 
 // Our TEAMS keys vs. football-data.org's team `name`/`shortName` don't always
 // match by naive substring -- seed known mismatches here. Left side is our
 // data.json key, right side is the exact API team name to match against.
+// Confirmed against a live run (2026-07-06); COD ('Congo DR') and ZAF/USA
+// need no override since they already match data.json's own `name` field.
 const NAME_OVERRIDES = {
-  BIH: 'Bosnia and Herzegovina',
-  COD: 'DR Congo',
-  CIV: "Ivory Coast",
-  USA: 'United States',
-  ZAF: 'South Africa',
+  BIH: 'Bosnia-Herzegovina',
+  CIV: 'Ivory Coast',
 };
 
 function normalize(s) {
@@ -74,15 +71,17 @@ function resultNote(match) {
 function applyLiveData(teams, matches, matchTeam) {
   const unrecognizedStages = new Set();
   const unmatchedTeams = new Set();
+  // Group-stage results are staged here, keyed by our team code, and only
+  // written into `teams` for codes that actually had a finished match this
+  // run -- so a team we fail to match (bad override, API hiccup, whatever)
+  // keeps its last-known-good data instead of being silently zeroed out.
+  const groupResults = new Map();
 
-  // Reset per-run so a re-run reflects the latest full state, not an accumulation.
-  for (const team of Object.values(teams)) {
-    team.games = [];
-    team.w = 0;
-    team.d = 0;
-    team.l = 0;
-    team.gf = 0;
-    team.ga = 0;
+  function groupResultFor(code) {
+    if (!groupResults.has(code)) {
+      groupResults.set(code, { games: [], w: 0, d: 0, l: 0, gf: 0, ga: 0 });
+    }
+    return groupResults.get(code);
   }
 
   for (const match of matches) {
@@ -99,16 +98,16 @@ function applyLiveData(teams, matches, matchTeam) {
 
     if (GROUP_STAGE_NAMES.includes(match.stage)) {
       if (homeCode && teams[homeCode]) {
-        const t = teams[homeCode];
-        t.games.push({ opp: match.awayTeam.name, gf: home, ga: away });
-        t.gf += home; t.ga += away;
-        if (home > away) t.w++; else if (home < away) t.l++; else t.d++;
+        const g = groupResultFor(homeCode);
+        g.games.push({ opp: match.awayTeam.name, gf: home, ga: away });
+        g.gf += home; g.ga += away;
+        if (home > away) g.w++; else if (home < away) g.l++; else g.d++;
       }
       if (awayCode && teams[awayCode]) {
-        const t = teams[awayCode];
-        t.games.push({ opp: match.homeTeam.name, gf: away, ga: home });
-        t.gf += away; t.ga += home;
-        if (away > home) t.w++; else if (away < home) t.l++; else t.d++;
+        const g = groupResultFor(awayCode);
+        g.games.push({ opp: match.homeTeam.name, gf: away, ga: home });
+        g.gf += away; g.ga += home;
+        if (away > home) g.w++; else if (away < home) g.l++; else g.d++;
       }
     } else if (R32_STAGE_NAMES.includes(match.stage)) {
       const note = resultNote(match);
@@ -128,6 +127,14 @@ function applyLiveData(teams, matches, matchTeam) {
     }
   }
 
+  for (const [code, g] of groupResults) {
+    Object.assign(teams[code], g);
+  }
+
+  const staleTeams = Object.keys(teams).filter((code) => !groupResults.has(code));
+  if (staleTeams.length) {
+    console.warn('No finished group-stage matches found this run for (left unchanged):', staleTeams);
+  }
   if (unrecognizedStages.size) {
     console.warn('Unrecognized stage values (matches skipped):', [...unrecognizedStages]);
   }
