@@ -19,12 +19,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The tournament Final is played July 19, 2026 -- cron has no built-in end date, so
+      # gate the scheduled trigger here instead of leaving it running (and burning free-tier
+      # API calls) indefinitely. Manual workflow_dispatch runs always bypass this, in case a
+      # correction is needed after the cutoff. Uses UTC date; being off by a few hours around
+      # the exact midnight boundary doesn't matter for a "stop after the tournament" cutoff.
+      - name: Check if within active window
+        id: window
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%Y-%m-%d)" \> "2026-07-19" ]; then
+            echo "active=false" >> "$GITHUB_OUTPUT"
+            echo "Past the July 19 cutoff -- skipping scheduled run."
+          else
+            echo "active=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run update script
+        if: steps.window.outputs.active == 'true'
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: node scripts/update-data.js
 
       - name: Commit and push if changed
+        if: steps.window.outputs.active == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
