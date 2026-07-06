@@ -8,9 +8,9 @@ A full-screen interactive world map visualising all 32 nations that reached the 
 
 ## About the Design File
 
-`FIFA 2026 Round of 32 Standalone.html` is the **only file this project needs** — a self-unpacking bundle exported from Claude Design's "Download Standalone HTML" feature. It embeds everything required to render (fonts, and the component runtime the app is written against) as inline data blobs, unpacked by a small bootstrap script on load. The only things it still fetches live over the network are the world-atlas TopoJSON geometry and per-country flag images — both genuine external resources, not local files, so they work from any host.
+`FIFA 2026 Round of 32 Standalone.html` is a self-unpacking bundle exported from Claude Design's "Download Standalone HTML" feature. It embeds everything required to render (fonts, and the component runtime the app is written against) as inline data blobs, unpacked by a small bootstrap script on load. It fetches three things live over the network: the world-atlas TopoJSON geometry, per-country flag images, and — as of this pass — `data.json` (see "Updating Data" below). None of these are bundled resources; they're genuine external/sibling-file fetches, so they work from any host that serves both files together.
 
-An earlier version of this file (without that bundling) depended on a `support.js` runtime that was never actually shipped alongside it, so it could only render inside the Claude Design preview tool, never in a plain browser or when deployed. That version, and a `data.json` extracted from it, have been removed from this repo — they were dead weight once this Standalone export replaced them. If you need them, they're still in git history (see commits before the "Add genuinely standalone build" commit).
+An earlier version of this file (without that bundling) depended on a `support.js` runtime that was never actually shipped alongside it, so it could only render inside the Claude Design preview tool, never in a plain browser or when deployed. That version has been removed from this repo — it was dead weight once this Standalone export replaced it. If you need it, it's still in git history (see commits before the "Add genuinely standalone build" commit).
 
 ---
 
@@ -56,11 +56,13 @@ To update: re-download a fresh Standalone export from Claude Design (see "Updati
 
 ## Updating Data
 
-Match data (the `TEAMS`/`ISO_MAP` objects — team records, players, facts) lives inline inside the app logic, which itself lives inside a JSON-encoded template string inside the bundle's `script[type="__bundler/template"]` block — not as a plain, directly-editable object at the top of the file like a typical HTML file. Hand-editing it means carefully editing JSON-escaped text inside JSON-escaped text, which is error-prone.
+`TEAMS` and `ISO_MAP` have been extracted out of the bundled template into a sibling `data.json` file. The embedded app now fetches it in `componentDidMount()` (alongside the existing world-atlas fetch) instead of holding the data as inline class fields — both files must be served together (same directory) for the map to render; opening the HTML file directly via `file://` won't work (fetch requires a real HTTP origin — use `python -m http.server` or GitHub Pages).
 
-The practical way to update results is to go back to Claude Design, update the design there, and re-download a fresh Standalone export.
+To hand-edit match data now: edit `data.json` directly. It's plain JSON — `{"TEAMS": {...}, "ISO_MAP": {...}}` — keyed the same way as before (3-letter team codes, numeric TopoJSON IDs), just with quoted keys/strings instead of the original JS object-literal syntax.
 
-**Future option:** if this needs to update automatically (e.g. live scores during the tournament), the right move is a fresh data-extraction pass — pull `TEAMS`/`ISO_MAP` out of the bundled template into a real sibling `data.json`, same idea as before, then wire up a GitHub Actions workflow against the football-data.org API (competition ID `2000`, free tier) to refresh it on a schedule. This hasn't been attempted against this bundle format yet — the previous attempt was against the old non-bundled file and doesn't carry over as-is.
+**Live updates:** a scheduled GitHub Actions workflow (`.github/workflows/update-data.yml`) polls the football-data.org API and rewrites `data.json` automatically, merging in only the fields that actually change during the tournament — `w`/`d`/`l`, `gf`/`ga`, `games`, `r32Game`, and `status`. Squad value, top players, and country facts are not covered by that API and stay hand-curated in `data.json`. See the workflow file and its update script for the exact mapping; it requires a `FOOTBALL_DATA_API_KEY` repo secret to run.
+
+If the underlying design itself changes (colors, layout, new interactions — not just match results), the right move is still to go back to Claude Design and re-download a fresh Standalone export, then re-run the same extraction pass to regenerate `data.json` and re-wire the fetch.
 
 ---
 
@@ -80,6 +82,7 @@ Uses `gb-eng` as the flag code (not `gb`) to load the correct St George's Cross 
 |---|---|---|
 | World Atlas 110m (jsDelivr) | Country geometries | Live fetch at runtime |
 | Flag CDN (flagcdn.com) | Country flag images | Live fetch at runtime |
+| `data.json` (sibling file, this repo) | Team/match data | Live fetch at runtime |
 | D3 v7, TopoJSON client, Google Fonts | Map rendering, zoom, typography | Bundled inline in the Standalone file |
 
 ---
@@ -88,7 +91,8 @@ Uses `gb-eng` as the flag code (not `gb`) to load the correct St George's Cross 
 
 | File | Purpose |
 |---|---|
-| `FIFA 2026 Round of 32 Standalone.html` | The entire app — self-contained, deployed as-is |
+| `FIFA 2026 Round of 32 Standalone.html` | The app shell — fetches `data.json` at runtime instead of holding match data inline |
+| `data.json` | Team/match data (`TEAMS`, `ISO_MAP`) — see "Updating Data" |
 | `index.html` | Tiny redirect to the file above, so the root URL works |
 | `.nojekyll` | Disables GitHub Pages' Jekyll processing |
 | `README.md` | This document |
