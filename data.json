@@ -13,7 +13,7 @@
       "ga": 1,
       "val": 807,
       "vLabel": "€807M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Algeria",
@@ -63,7 +63,8 @@
           "ga": 2,
           "note": "AET"
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "AUS": {
       "name": "Australia",
@@ -209,7 +210,7 @@
       "ga": 2,
       "val": 420,
       "vLabel": "€420M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Egypt",
@@ -259,7 +260,8 @@
           "ga": 2,
           "note": "AET"
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "BIH": {
       "name": "Bosnia & Herz.",
@@ -339,7 +341,7 @@
       "ga": 1,
       "val": 928,
       "vLabel": "€928M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Morocco",
@@ -387,8 +389,15 @@
           "opp": "Japan",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "R16",
+          "opp": "Norway",
+          "gf": 1,
+          "ga": 2
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "CPV": {
       "name": "Cape Verde",
@@ -469,7 +478,7 @@
       "ga": 3,
       "val": 155,
       "vLabel": "€155M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Bosnia-Herzegovina",
@@ -517,8 +526,15 @@
           "opp": "South Africa",
           "gf": 1,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "Morocco",
+          "gf": 0,
+          "ga": 3
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "COD": {
       "name": "Congo DR",
@@ -598,7 +614,7 @@
       "ga": 1,
       "val": 305,
       "vLabel": "€305M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Uzbekistan",
@@ -647,7 +663,8 @@
           "gf": 1,
           "ga": 0
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "CIV": {
       "name": "Côte d'Ivoire",
@@ -922,7 +939,7 @@
       "ga": 3,
       "val": 105,
       "vLabel": "€105M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Belgium",
@@ -972,7 +989,8 @@
           "ga": 3,
           "note": "pens"
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "ENG": {
       "name": "England",
@@ -987,7 +1005,7 @@
       "ga": 2,
       "val": 1360,
       "vLabel": "€1.36B",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Croatia",
@@ -1035,8 +1053,15 @@
           "opp": "Congo DR",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "R16",
+          "opp": "Mexico",
+          "gf": 3,
+          "ga": 2
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "FRA": {
       "name": "France",
@@ -1051,7 +1076,7 @@
       "ga": 2,
       "val": 1520,
       "vLabel": "€1.52B",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Senegal",
@@ -1099,8 +1124,15 @@
           "opp": "Sweden",
           "gf": 3,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "Paraguay",
+          "gf": 1,
+          "ga": 0
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "GER": {
       "name": "Germany",
@@ -1311,7 +1343,7 @@
       "ga": 0,
       "val": 210,
       "vLabel": "€210M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "South Africa",
@@ -1359,8 +1391,15 @@
           "opp": "Ecuador",
           "gf": 2,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "England",
+          "gf": 2,
+          "ga": 3
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "MAR": {
       "name": "Morocco",
@@ -1375,7 +1414,7 @@
       "ga": 3,
       "val": 255,
       "vLabel": "€255M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Brazil",
@@ -1424,8 +1463,15 @@
           "gf": 4,
           "ga": 3,
           "note": "pens"
+        },
+        {
+          "stage": "R16",
+          "opp": "Canada",
+          "gf": 3,
+          "ga": 0
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "NED": {
       "name": "Netherlands",
@@ -1506,7 +1552,7 @@
       "ga": 7,
       "val": 500,
       "vLabel": "€500M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Iraq",
@@ -1554,8 +1600,15 @@
           "opp": "Ivory Coast",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "R16",
+          "opp": "Brazil",
+          "gf": 2,
+          "ga": 1
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "PAR": {
       "name": "Paraguay",
@@ -1570,7 +1623,7 @@
       "ga": 4,
       "val": 80,
       "vLabel": "€80M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "United States",
@@ -1619,8 +1672,15 @@
           "gf": 5,
           "ga": 4,
           "note": "pens"
+        },
+        {
+          "stage": "R16",
+          "opp": "France",
+          "gf": 0,
+          "ga": 1
         }
-      ]
+      ],
+      "eliminatedIn": "R16"
     },
     "POR": {
       "name": "Portugal",
@@ -1635,7 +1695,7 @@
       "ga": 1,
       "val": 1010,
       "vLabel": "€1.01B",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Congo DR",
@@ -1684,7 +1744,8 @@
           "gf": 2,
           "ga": 1
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "SEN": {
       "name": "Senegal",
@@ -1830,7 +1891,7 @@
       "ga": 0,
       "val": 1220,
       "vLabel": "€1.22B",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Cape Verde Islands",
@@ -1879,7 +1940,8 @@
           "gf": 3,
           "ga": 0
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "SWE": {
       "name": "Sweden",
@@ -1959,7 +2021,7 @@
       "ga": 3,
       "val": 200,
       "vLabel": "€200M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Qatar",
@@ -2008,7 +2070,8 @@
           "gf": 2,
           "ga": 0
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     },
     "USA": {
       "name": "United States",
@@ -2023,7 +2086,7 @@
       "ga": 4,
       "val": 200,
       "vLabel": "€200M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Paraguay",
@@ -2072,7 +2135,8 @@
           "gf": 2,
           "ga": 0
         }
-      ]
+      ],
+      "eliminatedIn": "R32"
     }
   },
   "ISO_MAP": {
