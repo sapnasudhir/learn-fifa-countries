@@ -71,6 +71,8 @@ function resultNote(match) {
 function applyLiveData(teams, matches, matchTeam) {
   const unrecognizedStages = new Set();
   const unmatchedTeams = new Set();
+  const stageCounts = new Map(); // diagnostic: every distinct stage seen among FINISHED matches, and how many involve a known team
+  const r32TeamsSeen = new Set(); // diagnostic: which of our 32 codes actually got an R32_STAGE_NAMES match this run
   // Group-stage results are staged here, keyed by our team code, and only
   // written into `teams` for codes that actually had a finished match this
   // run -- so a team we fail to match (bad override, API hiccup, whatever)
@@ -96,6 +98,10 @@ function applyLiveData(teams, matches, matchTeam) {
     const home = match.score.fullTime.home;
     const away = match.score.fullTime.away;
 
+    if (homeCode || awayCode) {
+      stageCounts.set(match.stage, (stageCounts.get(match.stage) || 0) + 1);
+    }
+
     if (GROUP_STAGE_NAMES.includes(match.stage)) {
       if (homeCode && teams[homeCode]) {
         const g = groupResultFor(homeCode);
@@ -117,10 +123,12 @@ function applyLiveData(teams, matches, matchTeam) {
       if (homeCode && teams[homeCode]) {
         teams[homeCode].r32Game = { opp: match.awayTeam.name, gf: home, ga: away, ...(note ? { note } : {}) };
         teams[homeCode].status = winnerSide === 'HOME' ? 'R16' : winnerSide === 'AWAY' ? 'OUT' : teams[homeCode].status;
+        r32TeamsSeen.add(homeCode);
       }
       if (awayCode && teams[awayCode]) {
         teams[awayCode].r32Game = { opp: match.homeTeam.name, gf: away, ga: home, ...(note ? { note } : {}) };
         teams[awayCode].status = winnerSide === 'AWAY' ? 'R16' : winnerSide === 'HOME' ? 'OUT' : teams[awayCode].status;
+        r32TeamsSeen.add(awayCode);
       }
     } else {
       unrecognizedStages.add(match.stage);
@@ -141,6 +149,8 @@ function applyLiveData(teams, matches, matchTeam) {
   if (unmatchedTeams.size) {
     console.warn('API teams that did not match any data.json team (add to NAME_OVERRIDES):', [...unmatchedTeams]);
   }
+  console.log('Diagnostic -- FINISHED matches per stage (only counting ones involving a known team):', Object.fromEntries(stageCounts));
+  console.log('Diagnostic -- our team codes with an R32_STAGE_NAMES match this run:', [...r32TeamsSeen]);
 }
 
 async function main() {
