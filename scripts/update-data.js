@@ -156,8 +156,14 @@ function applyLiveData(teams, matches, matchTeam) {
     }
 
     const note = resultNote(match);
-    // `winner` is authoritative (covers AET/penalties); fall back to fullTime score only if absent.
-    const winnerSide = match.score.winner || (home > away ? 'HOME' : away > home ? 'AWAY' : null);
+    // The actual fullTime score is authoritative -- confirmed via a live run (2026-07-06) that
+    // match.score.winner can be 'DRAW' even for a decisive, non-tied scoreline (it appears to
+    // describe the 90-minute regulation result, not who actually advanced), which previously
+    // caused every affected team to be wrongly marked OUT regardless of who really won. Only
+    // fall back to `winner` for a genuine tie in the recorded score (shouldn't happen for a
+    // finished knockout match, but kept as a safety net).
+    const winnerSide = home > away ? 'HOME' : away > home ? 'AWAY'
+      : (match.score.winner === 'HOME' || match.score.winner === 'AWAY' ? match.score.winner : null);
 
     if (homeCode && teams[homeCode]) {
       knockoutResultFor(homeCode).set(stage, {
