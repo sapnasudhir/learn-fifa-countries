@@ -13,7 +13,7 @@
       "ga": 1,
       "val": 807,
       "vLabel": "€807M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Algeria",
@@ -63,8 +63,7 @@
           "ga": 2,
           "note": "AET"
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "AUS": {
       "name": "Australia",
@@ -210,7 +209,7 @@
       "ga": 2,
       "val": 420,
       "vLabel": "€420M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Egypt",
@@ -260,8 +259,7 @@
           "ga": 2,
           "note": "AET"
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "BIH": {
       "name": "Bosnia & Herz.",
@@ -614,7 +612,7 @@
       "ga": 1,
       "val": 305,
       "vLabel": "€305M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Uzbekistan",
@@ -663,8 +661,7 @@
           "gf": 1,
           "ga": 0
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "CIV": {
       "name": "Côte d'Ivoire",
@@ -939,7 +936,7 @@
       "ga": 3,
       "val": 105,
       "vLabel": "€105M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Belgium",
@@ -989,8 +986,7 @@
           "ga": 3,
           "note": "pens"
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "ENG": {
       "name": "England",
@@ -1005,7 +1001,7 @@
       "ga": 2,
       "val": 1360,
       "vLabel": "€1.36B",
-      "status": "OUT",
+      "status": "QF",
       "games": [
         {
           "opp": "Croatia",
@@ -1060,8 +1056,7 @@
           "gf": 3,
           "ga": 2
         }
-      ],
-      "eliminatedIn": "R16"
+      ]
     },
     "FRA": {
       "name": "France",
@@ -1076,7 +1071,7 @@
       "ga": 2,
       "val": 1520,
       "vLabel": "€1.52B",
-      "status": "OUT",
+      "status": "QF",
       "games": [
         {
           "opp": "Senegal",
@@ -1131,8 +1126,7 @@
           "gf": 1,
           "ga": 0
         }
-      ],
-      "eliminatedIn": "R16"
+      ]
     },
     "GER": {
       "name": "Germany",
@@ -1414,7 +1408,7 @@
       "ga": 3,
       "val": 255,
       "vLabel": "€255M",
-      "status": "OUT",
+      "status": "QF",
       "games": [
         {
           "opp": "Brazil",
@@ -1470,8 +1464,7 @@
           "gf": 3,
           "ga": 0
         }
-      ],
-      "eliminatedIn": "R16"
+      ]
     },
     "NED": {
       "name": "Netherlands",
@@ -1552,7 +1545,7 @@
       "ga": 7,
       "val": 500,
       "vLabel": "€500M",
-      "status": "OUT",
+      "status": "QF",
       "games": [
         {
           "opp": "Iraq",
@@ -1607,8 +1600,7 @@
           "gf": 2,
           "ga": 1
         }
-      ],
-      "eliminatedIn": "R16"
+      ]
     },
     "PAR": {
       "name": "Paraguay",
@@ -1695,7 +1687,7 @@
       "ga": 1,
       "val": 1010,
       "vLabel": "€1.01B",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Congo DR",
@@ -1744,8 +1736,7 @@
           "gf": 2,
           "ga": 1
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "SEN": {
       "name": "Senegal",
@@ -1891,7 +1882,7 @@
       "ga": 0,
       "val": 1220,
       "vLabel": "€1.22B",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Cape Verde Islands",
@@ -1940,8 +1931,7 @@
           "gf": 3,
           "ga": 0
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "SWE": {
       "name": "Sweden",
@@ -2021,7 +2011,7 @@
       "ga": 3,
       "val": 200,
       "vLabel": "€200M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Qatar",
@@ -2070,8 +2060,7 @@
           "gf": 2,
           "ga": 0
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     },
     "USA": {
       "name": "United States",
@@ -2086,7 +2075,7 @@
       "ga": 4,
       "val": 200,
       "vLabel": "€200M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "Paraguay",
@@ -2135,8 +2124,7 @@
           "gf": 2,
           "ga": 0
         }
-      ],
-      "eliminatedIn": "R32"
+      ]
     }
   },
   "ISO_MAP": {
