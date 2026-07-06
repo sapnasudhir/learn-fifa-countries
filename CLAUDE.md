@@ -8,11 +8,13 @@ A single-file interactive world map visualizing the 32 nations that reached the 
 
 This is a design-reference deliverable, not a running app with a build pipeline — there is no `package.json` and no test suite. `README.md` is a detailed handoff doc for the next engineer/agent picking this up; read it before making changes.
 
-Live deployment: `https://sapnasudhir.github.io/learn-fifa-countries/FIFA%202026%20Round%20of%2032%20Standalone.html` (GitHub Pages, `main` branch, root path — note the repo root itself has no `index.html`, so the bare root URL 404s by design).
+Live deployment: `https://sapnasudhir.github.io/learn-fifa-countries/` (GitHub Pages, `main` branch, root path). A tiny `index.html` redirects to the actual design file; `.nojekyll` disables GitHub Pages' default Jekyll processing (which would otherwise render `README.md` as the homepage instead).
 
 ## Files
 
-- `FIFA 2026 Round of 32 Standalone.html` — the entire app. This is the only file in the project; it's committed and deployed as-is, with no build step.
+- `FIFA 2026 Round of 32 Standalone.html` — the entire app. Committed and deployed as-is, with no build step.
+- `index.html` — redirect shim so the bare root URL lands on the file above. Not part of the design; don't touch unless the target filename changes.
+- `.nojekyll` — empty marker file, disables Jekyll on GitHub Pages.
 - `README.md` — handoff doc: design tokens, deployment, and the data-update situation.
 
 ## How this file is structured: a self-unpacking bundle

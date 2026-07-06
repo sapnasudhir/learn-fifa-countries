@@ -16,11 +16,14 @@ An earlier version of this file (without that bundling) depended on a `support.j
 
 ## Deployment
 
-Live on GitHub Pages at the direct file path (the repo root intentionally has no `index.html`, so the bare root URL 404s):
+Live on GitHub Pages at the repo root — a tiny `index.html` redirect points to the actual design file, so both URLs work:
 
+**https://sapnasudhir.github.io/learn-fifa-countries/**
 **https://sapnasudhir.github.io/learn-fifa-countries/FIFA%202026%20Round%20of%2032%20Standalone.html**
 
-To update: re-download a fresh Standalone export from Claude Design (see "Updating Data" below for why a hand-edit isn't practical), replace this file, commit, and push to `main` — GitHub Pages redeploys automatically.
+A `.nojekyll` file disables GitHub Pages' default Jekyll processing (which would otherwise render `README.md` itself as the homepage instead of the redirect).
+
+To update: re-download a fresh Standalone export from Claude Design (see "Updating Data" below for why a hand-edit isn't practical), replace `FIFA 2026 Round of 32 Standalone.html`, commit, and push to `main` — GitHub Pages redeploys automatically. The redirect `index.html` doesn't need to change.
 
 ---
 
@@ -86,6 +89,8 @@ Uses `gb-eng` as the flag code (not `gb`) to load the correct St George's Cross 
 | File | Purpose |
 |---|---|
 | `FIFA 2026 Round of 32 Standalone.html` | The entire app — self-contained, deployed as-is |
+| `index.html` | Tiny redirect to the file above, so the root URL works |
+| `.nojekyll` | Disables GitHub Pages' Jekyll processing |
 | `README.md` | This document |
 
 ---
