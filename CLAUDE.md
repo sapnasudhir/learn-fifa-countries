@@ -8,6 +8,8 @@ A single-file interactive world map visualizing the 32 nations that reached the 
 
 This is a design-reference deliverable, not a running app with a build pipeline — there is no `package.json`, no git repo, and no test suite. `README.md` is a detailed handoff doc for the next engineer/agent picking this up; read it before making changes, but verify its claims against the actual HTML (see caveat below).
 
+**This file no longer renders in the Claude Design preview tool** — since data now comes from a `fetch('./data.json')` call, it must be viewed via a real local HTTP server (`python -m http.server` in this folder, then open the HTML URL) or a real deployment. See `README.md`'s "Local Preview" section.
+
 ## Files
 
 - `FIFA 2026 Round of 32.html` — the app shell: markup, styles, and logic. Match data is no longer inline — it's fetched from `data.json` at startup.
@@ -19,10 +21,12 @@ This is a design-reference deliverable, not a running app with a build pipeline 
 The README describes the file as "no framework, no build step," but the markup actually uses a custom component DSL:
 - `<x-dc>` root wrapper, `<helmet>` for head content
 - Template bindings (`{{ zoomIn }}`, `{{ tierColor }}`) and directives (`sc-if`, `sc-for`)
-- `<script src="./support.js">` — a runtime this file depends on to interpret the DSL, but `support.js` is **not present in this directory**
+- `<script src="./support.js">` — a runtime this file depends on to interpret the DSL, but `support.js` is **not present in this directory** and confirmed 404s when served locally (checked via `python -m http.server`)
 - The actual logic lives in `<script type="text/x-dc" data-dc-script">` (starting ~line 193) as `class Component extends DCLogic { ... }`
 
 Consequence: the HTML file will **not** render standalone by double-clicking it in a browser — it needs the `support.js` runtime supplied by whatever tool produced it. Don't assume "open in browser" works without that dependency; if you need a truly standalone version, that conversion (stripping the DSL to vanilla JS/D3) is real work, not a given.
+
+**Unresolved:** it's not yet established where `support.js` is supposed to come from — whether it was ever meant to be checked into this folder, or whether some other tool/CDN normally supplies it. Until that's answered, even serving this file over a real local HTTP server may not fully render the DSL-driven markup/bindings — data.json loading correctly (confirmed working) is necessary but may not be sufficient for a full visual render. Don't assume a local-server preview is fully verified just because the HTTP responses are 200s.
 
 ## Architecture of the Component class (in the `data-dc-script` block)
 

@@ -16,6 +16,22 @@ Built as a single self-contained HTML file using **D3 v7** (map rendering, zoom/
 
 ---
 
+## Local Preview
+
+**This file no longer renders correctly in the Claude Design preview tool.** Since match data now lives in a separate `data.json` file that the page `fetch()`es at startup, and the Design preview only serves the single HTML file in isolation (it can't also serve a sibling `data.json`), the fetch fails silently and the map renders with no data.
+
+To view it correctly, always serve the folder over a real local HTTP server instead:
+
+```
+python -m http.server 8000
+```
+
+then open `http://localhost:8000/FIFA%202026%20Round%20of%2032.html` in a real browser. Once deployed to GitHub Pages/Vercel (Option 2, Step 3), it will work the same way there.
+
+**Known open issue:** the page's markup also references a `<script src="./support.js">` runtime (for the `<x-dc>`/`sc-if`/`sc-for` component DSL the file is written in) that is not present in this folder. Where this normally comes from, and whether it needs to be added here for local-server rendering to fully work, is still unresolved — see `CLAUDE.md`.
+
+---
+
 ## Fidelity
 
 **High-fidelity.** Colours, typography, spacing, interactions, and animations are final. Do not restyle — replicate exactly.
