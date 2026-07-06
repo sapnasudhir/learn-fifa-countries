@@ -1695,7 +1695,7 @@
       "ga": 1,
       "val": 1010,
       "vLabel": "€1.01B",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Congo DR",
@@ -1743,9 +1743,15 @@
           "opp": "Croatia",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "R16",
+          "opp": "Spain",
+          "gf": 0,
+          "ga": 1
         }
       ],
-      "nextOpponent": "Spain"
+      "eliminatedIn": "R16"
     },
     "SEN": {
       "name": "Senegal",
@@ -1891,7 +1897,7 @@
       "ga": 0,
       "val": 1220,
       "vLabel": "€1.22B",
-      "status": "R16",
+      "status": "QF",
       "games": [
         {
           "opp": "Cape Verde Islands",
@@ -1939,9 +1945,14 @@
           "opp": "Austria",
           "gf": 3,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "Portugal",
+          "gf": 1,
+          "ga": 0
         }
-      ],
-      "nextOpponent": "Portugal"
+      ]
     },
     "SWE": {
       "name": "Sweden",
