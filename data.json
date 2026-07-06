@@ -10,7 +10,7 @@
       "d": 0,
       "l": 0,
       "gf": 8,
-      "ga": 0,
+      "ga": 1,
       "val": 807,
       "vLabel": "€807M",
       "status": "R16",
@@ -32,7 +32,7 @@
         }
       ],
       "r32Game": {
-        "opp": "Cape Verde",
+        "opp": "Cape Verde Islands",
         "gf": 3,
         "ga": 2,
         "note": "AET"
@@ -71,33 +71,33 @@
       "w": 1,
       "d": 1,
       "l": 1,
-      "gf": 3,
-      "ga": 3,
+      "gf": 2,
+      "ga": 2,
       "val": 125,
       "vLabel": "€125M",
       "status": "OUT",
       "games": [
-        {
-          "opp": "USA",
-          "gf": 0,
-          "ga": 2
-        },
         {
           "opp": "Turkey",
           "gf": 2,
           "ga": 0
         },
         {
+          "opp": "United States",
+          "gf": 0,
+          "ga": 2
+        },
+        {
           "opp": "Paraguay",
-          "gf": 1,
-          "ga": 1
+          "gf": 0,
+          "ga": 0
         }
       ],
       "r32Game": {
         "opp": "Egypt",
-        "gf": 1,
-        "ga": 1,
-        "note": "2–4 pens"
+        "gf": 3,
+        "ga": 5,
+        "note": "pens"
       },
       "players": [
         {
@@ -133,21 +133,21 @@
       "w": 1,
       "d": 1,
       "l": 1,
-      "gf": 5,
-      "ga": 5,
+      "gf": 6,
+      "ga": 6,
       "val": 190,
       "vLabel": "€190M",
       "status": "OUT",
       "games": [
         {
+          "opp": "Jordan",
+          "gf": 3,
+          "ga": 1
+        },
+        {
           "opp": "Argentina",
           "gf": 0,
           "ga": 2
-        },
-        {
-          "opp": "Jordan",
-          "gf": 2,
-          "ga": 0
         },
         {
           "opp": "Algeria",
@@ -158,7 +158,7 @@
       "r32Game": {
         "opp": "Spain",
         "gf": 0,
-        "ga": 2
+        "ga": 3
       },
       "players": [
         {
@@ -194,7 +194,7 @@
       "w": 1,
       "d": 2,
       "l": 0,
-      "gf": 7,
+      "gf": 6,
       "ga": 2,
       "val": 420,
       "vLabel": "€420M",
@@ -253,31 +253,15 @@
       "iso2": "ba",
       "group": "B",
       "pos": "3rd",
-      "w": 1,
-      "d": 1,
-      "l": 1,
-      "gf": 4,
-      "ga": 4,
+      "w": 0,
+      "d": 0,
+      "l": 0,
+      "gf": 0,
+      "ga": 0,
       "val": 95,
       "vLabel": "€95M",
       "status": "OUT",
-      "games": [
-        {
-          "opp": "Switzerland",
-          "gf": 1,
-          "ga": 1
-        },
-        {
-          "opp": "Canada",
-          "gf": 1,
-          "ga": 3
-        },
-        {
-          "opp": "Qatar",
-          "gf": 2,
-          "ga": 0
-        }
-      ],
+      "games": [],
       "r32Game": {
         "opp": "USA",
         "gf": 0,
@@ -325,13 +309,13 @@
       "games": [
         {
           "opp": "Morocco",
-          "gf": 0,
-          "ga": 0
+          "gf": 1,
+          "ga": 1
         },
         {
           "opp": "Haiti",
-          "gf": 4,
-          "ga": 1
+          "gf": 3,
+          "ga": 0
         },
         {
           "opp": "Scotland",
@@ -340,9 +324,9 @@
         }
       ],
       "r32Game": {
-        "opp": "Croatia",
+        "opp": "Japan",
         "gf": 2,
-        "ga": 0
+        "ga": 1
       },
       "players": [
         {
@@ -437,18 +421,18 @@
       "iso2": "ca",
       "group": "B",
       "pos": "2nd",
-      "w": 2,
-      "d": 0,
+      "w": 1,
+      "d": 1,
       "l": 1,
-      "gf": 9,
-      "ga": 2,
+      "gf": 8,
+      "ga": 3,
       "val": 155,
       "vLabel": "€155M",
       "status": "R16",
       "games": [
         {
-          "opp": "Switzerland",
-          "gf": 0,
+          "opp": "Bosnia-Herzegovina",
+          "gf": 1,
           "ga": 1
         },
         {
@@ -457,9 +441,9 @@
           "ga": 0
         },
         {
-          "opp": "Bosnia & Herz.",
-          "gf": 3,
-          "ga": 1
+          "opp": "Switzerland",
+          "gf": 1,
+          "ga": 2
         }
       ],
       "r32Game": {
@@ -498,31 +482,15 @@
       "iso2": "cd",
       "group": "L",
       "pos": "3rd",
-      "w": 1,
-      "d": 1,
-      "l": 1,
-      "gf": 4,
-      "ga": 4,
+      "w": 0,
+      "d": 0,
+      "l": 0,
+      "gf": 0,
+      "ga": 0,
       "val": 55,
       "vLabel": "€55M",
       "status": "OUT",
-      "games": [
-        {
-          "opp": "England",
-          "gf": 0,
-          "ga": 2
-        },
-        {
-          "opp": "Croatia",
-          "gf": 1,
-          "ga": 1
-        },
-        {
-          "opp": "Uzbekistan",
-          "gf": 3,
-          "ga": 1
-        }
-      ],
+      "games": [],
       "r32Game": {
         "opp": "England",
         "gf": 1,
@@ -562,31 +530,31 @@
       "w": 2,
       "d": 1,
       "l": 0,
-      "gf": 5,
-      "ga": 0,
+      "gf": 4,
+      "ga": 1,
       "val": 305,
       "vLabel": "€305M",
       "status": "R16",
       "games": [
         {
-          "opp": "Portugal",
-          "gf": 0,
-          "ga": 0
-        },
-        {
-          "opp": "Ghana",
-          "gf": 2,
-          "ga": 0
-        },
-        {
           "opp": "Uzbekistan",
           "gf": 3,
+          "ga": 1
+        },
+        {
+          "opp": "Congo DR",
+          "gf": 1,
+          "ga": 0
+        },
+        {
+          "opp": "Portugal",
+          "gf": 0,
           "ga": 0
         }
       ],
       "r32Game": {
         "opp": "Ghana",
-        "gf": 2,
+        "gf": 1,
         "ga": 0
       },
       "players": [
@@ -623,21 +591,21 @@
       "w": 2,
       "d": 0,
       "l": 1,
-      "gf": 5,
+      "gf": 4,
       "ga": 2,
       "val": 245,
       "vLabel": "€245M",
       "status": "OUT",
       "games": [
         {
+          "opp": "Ecuador",
+          "gf": 1,
+          "ga": 0
+        },
+        {
           "opp": "Germany",
           "gf": 1,
           "ga": 2
-        },
-        {
-          "opp": "Ecuador",
-          "gf": 2,
-          "ga": 0
         },
         {
           "opp": "Curaçao",
@@ -647,8 +615,8 @@
       ],
       "r32Game": {
         "opp": "Norway",
-        "gf": 0,
-        "ga": 1
+        "gf": 1,
+        "ga": 2
       },
       "players": [
         {
@@ -681,34 +649,34 @@
       "iso2": "hr",
       "group": "L",
       "pos": "2nd",
-      "w": 1,
-      "d": 1,
+      "w": 2,
+      "d": 0,
       "l": 1,
-      "gf": 4,
-      "ga": 4,
+      "gf": 5,
+      "ga": 5,
       "val": 195,
       "vLabel": "€195M",
       "status": "OUT",
       "games": [
         {
           "opp": "England",
-          "gf": 1,
-          "ga": 3
-        },
-        {
-          "opp": "Congo DR",
-          "gf": 1,
-          "ga": 1
+          "gf": 2,
+          "ga": 4
         },
         {
           "opp": "Panama",
-          "gf": 2,
+          "gf": 1,
           "ga": 0
+        },
+        {
+          "opp": "Ghana",
+          "gf": 2,
+          "ga": 1
         }
       ],
       "r32Game": {
-        "opp": "Brazil",
-        "gf": 0,
+        "opp": "Portugal",
+        "gf": 1,
         "ga": 2
       },
       "players": [
@@ -807,25 +775,25 @@
       "d": 1,
       "l": 1,
       "gf": 2,
-      "ga": 3,
+      "ga": 2,
       "val": 100,
       "vLabel": "€100M",
       "status": "OUT",
       "games": [
         {
-          "opp": "Germany",
-          "gf": 2,
-          "ga": 1
-        },
-        {
-          "opp": "Côte d'Ivoire",
+          "opp": "Ivory Coast",
           "gf": 0,
-          "ga": 2
+          "ga": 1
         },
         {
           "opp": "Curaçao",
           "gf": 0,
           "ga": 0
+        },
+        {
+          "opp": "Germany",
+          "gf": 2,
+          "ga": 1
         }
       ],
       "r32Game": {
@@ -891,9 +859,9 @@
       ],
       "r32Game": {
         "opp": "Australia",
-        "gf": 1,
-        "ga": 1,
-        "note": "4–2 pens"
+        "gf": 5,
+        "ga": 3,
+        "note": "pens"
       },
       "players": [
         {
@@ -926,10 +894,10 @@
       "iso2": "gb-eng",
       "group": "L",
       "pos": "1st",
-      "w": 3,
-      "d": 0,
+      "w": 2,
+      "d": 1,
       "l": 0,
-      "gf": 7,
+      "gf": 6,
       "ga": 2,
       "val": 1360,
       "vLabel": "€1.36B",
@@ -937,18 +905,18 @@
       "games": [
         {
           "opp": "Croatia",
-          "gf": 3,
-          "ga": 1
+          "gf": 4,
+          "ga": 2
         },
         {
-          "opp": "Congo DR",
-          "gf": 2,
+          "opp": "Ghana",
+          "gf": 0,
           "ga": 0
         },
         {
           "opp": "Panama",
           "gf": 2,
-          "ga": 1
+          "ga": 0
         }
       ],
       "r32Game": {
@@ -1015,7 +983,7 @@
       "r32Game": {
         "opp": "Sweden",
         "gf": 3,
-        "ga": 1
+        "ga": 0
       },
       "players": [
         {
@@ -1051,21 +1019,21 @@
       "w": 2,
       "d": 0,
       "l": 1,
-      "gf": 8,
-      "ga": 3,
+      "gf": 10,
+      "ga": 4,
       "val": 947,
       "vLabel": "€947M",
       "status": "OUT",
       "games": [
         {
-          "opp": "Côte d'Ivoire",
-          "gf": 2,
+          "opp": "Curaçao",
+          "gf": 7,
           "ga": 1
         },
         {
-          "opp": "Curaçao",
-          "gf": 5,
-          "ga": 0
+          "opp": "Ivory Coast",
+          "gf": 2,
+          "ga": 1
         },
         {
           "opp": "Ecuador",
@@ -1075,8 +1043,9 @@
       ],
       "r32Game": {
         "opp": "Paraguay",
-        "gf": 0,
-        "ga": 1
+        "gf": 4,
+        "ga": 5,
+        "note": "pens"
       },
       "players": [
         {
@@ -1112,32 +1081,32 @@
       "w": 1,
       "d": 1,
       "l": 1,
-      "gf": 3,
-      "ga": 3,
+      "gf": 2,
+      "ga": 2,
       "val": 100,
       "vLabel": "€100M",
       "status": "OUT",
       "games": [
         {
-          "opp": "Portugal",
+          "opp": "Panama",
           "gf": 1,
-          "ga": 1
-        },
-        {
-          "opp": "Colombia",
-          "gf": 0,
-          "ga": 2
-        },
-        {
-          "opp": "Uzbekistan",
-          "gf": 2,
           "ga": 0
+        },
+        {
+          "opp": "England",
+          "gf": 0,
+          "ga": 0
+        },
+        {
+          "opp": "Croatia",
+          "gf": 1,
+          "ga": 2
         }
       ],
       "r32Game": {
         "opp": "Colombia",
         "gf": 0,
-        "ga": 2
+        "ga": 1
       },
       "players": [
         {
@@ -1196,8 +1165,8 @@
         }
       ],
       "r32Game": {
-        "opp": "Portugal",
-        "gf": 0,
+        "opp": "Brazil",
+        "gf": 1,
         "ga": 2
       },
       "players": [
@@ -1246,7 +1215,7 @@
           "ga": 0
         },
         {
-          "opp": "Korea Republic",
+          "opp": "South Korea",
           "gf": 1,
           "ga": 0
         },
@@ -1296,19 +1265,19 @@
       "d": 1,
       "l": 0,
       "gf": 6,
-      "ga": 2,
+      "ga": 3,
       "val": 255,
       "vLabel": "€255M",
       "status": "R16",
       "games": [
         {
           "opp": "Brazil",
-          "gf": 0,
-          "ga": 0
+          "gf": 1,
+          "ga": 1
         },
         {
           "opp": "Scotland",
-          "gf": 2,
+          "gf": 1,
           "ga": 0
         },
         {
@@ -1319,9 +1288,9 @@
       ],
       "r32Game": {
         "opp": "Netherlands",
-        "gf": 1,
-        "ga": 1,
-        "note": "4–2 pens"
+        "gf": 4,
+        "ga": 3,
+        "note": "pens"
       },
       "players": [
         {
@@ -1381,9 +1350,9 @@
       ],
       "r32Game": {
         "opp": "Morocco",
-        "gf": 1,
-        "ga": 1,
-        "note": "2–4 pens"
+        "gf": 3,
+        "ga": 4,
+        "note": "pens"
       },
       "players": [
         {
@@ -1442,9 +1411,9 @@
         }
       ],
       "r32Game": {
-        "opp": "Côte d'Ivoire",
-        "gf": 1,
-        "ga": 0
+        "opp": "Ivory Coast",
+        "gf": 2,
+        "ga": 1
       },
       "players": [
         {
@@ -1480,12 +1449,17 @@
       "w": 1,
       "d": 1,
       "l": 1,
-      "gf": 3,
+      "gf": 2,
       "ga": 4,
       "val": 80,
       "vLabel": "€80M",
       "status": "R16",
       "games": [
+        {
+          "opp": "United States",
+          "gf": 1,
+          "ga": 4
+        },
         {
           "opp": "Turkey",
           "gf": 1,
@@ -1493,19 +1467,15 @@
         },
         {
           "opp": "Australia",
-          "gf": 1,
-          "ga": 1
-        },
-        {
-          "opp": "USA",
-          "gf": 1,
-          "ga": 3
+          "gf": 0,
+          "ga": 0
         }
       ],
       "r32Game": {
         "opp": "Germany",
-        "gf": 1,
-        "ga": 0
+        "gf": 5,
+        "ga": 4,
+        "note": "pens"
       },
       "players": [
         {
@@ -1541,32 +1511,32 @@
       "w": 1,
       "d": 2,
       "l": 0,
-      "gf": 4,
+      "gf": 6,
       "ga": 1,
       "val": 1010,
       "vLabel": "€1.01B",
       "status": "R16",
       "games": [
         {
-          "opp": "Colombia",
-          "gf": 0,
-          "ga": 0
+          "opp": "Congo DR",
+          "gf": 1,
+          "ga": 1
         },
         {
           "opp": "Uzbekistan",
-          "gf": 3,
+          "gf": 5,
           "ga": 0
         },
         {
-          "opp": "Ghana",
-          "gf": 1,
-          "ga": 1
+          "opp": "Colombia",
+          "gf": 0,
+          "ga": 0
         }
       ],
       "r32Game": {
-        "opp": "Japan",
+        "opp": "Croatia",
         "gf": 2,
-        "ga": 0
+        "ga": 1
       },
       "players": [
         {
@@ -1664,7 +1634,7 @@
       "w": 1,
       "d": 1,
       "l": 1,
-      "gf": 3,
+      "gf": 2,
       "ga": 3,
       "val": 55,
       "vLabel": "€55M",
@@ -1681,7 +1651,7 @@
           "ga": 1
         },
         {
-          "opp": "Korea Republic",
+          "opp": "South Korea",
           "gf": 1,
           "ga": 0
         }
@@ -1732,7 +1702,7 @@
       "status": "R16",
       "games": [
         {
-          "opp": "Cape Verde",
+          "opp": "Cape Verde Islands",
           "gf": 0,
           "ga": 0
         },
@@ -1749,7 +1719,7 @@
       ],
       "r32Game": {
         "opp": "Austria",
-        "gf": 2,
+        "gf": 3,
         "ga": 0
       },
       "players": [
@@ -1787,7 +1757,7 @@
       "d": 1,
       "l": 1,
       "gf": 7,
-      "ga": 6,
+      "ga": 7,
       "val": 200,
       "vLabel": "€200M",
       "status": "OUT",
@@ -1810,7 +1780,7 @@
       ],
       "r32Game": {
         "opp": "France",
-        "gf": 1,
+        "gf": 0,
         "ga": 3
       },
       "players": [
@@ -1847,25 +1817,25 @@
       "w": 2,
       "d": 1,
       "l": 0,
-      "gf": 5,
-      "ga": 2,
+      "gf": 7,
+      "ga": 3,
       "val": 200,
       "vLabel": "€200M",
       "status": "R16",
       "games": [
         {
-          "opp": "Canada",
-          "gf": 1,
-          "ga": 0
-        },
-        {
-          "opp": "Bosnia & Herz.",
+          "opp": "Qatar",
           "gf": 1,
           "ga": 1
         },
         {
-          "opp": "Qatar",
-          "gf": 3,
+          "opp": "Bosnia-Herzegovina",
+          "gf": 4,
+          "ga": 1
+        },
+        {
+          "opp": "Canada",
+          "gf": 2,
           "ga": 1
         }
       ],
@@ -1908,21 +1878,21 @@
       "w": 2,
       "d": 0,
       "l": 1,
-      "gf": 7,
+      "gf": 8,
       "ga": 4,
       "val": 200,
       "vLabel": "€200M",
       "status": "R16",
       "games": [
         {
+          "opp": "Paraguay",
+          "gf": 4,
+          "ga": 1
+        },
+        {
           "opp": "Australia",
           "gf": 2,
           "ga": 0
-        },
-        {
-          "opp": "Paraguay",
-          "gf": 3,
-          "ga": 1
         },
         {
           "opp": "Turkey",
@@ -1931,7 +1901,7 @@
         }
       ],
       "r32Game": {
-        "opp": "Bosnia & Herz.",
+        "opp": "Bosnia-Herzegovina",
         "gf": 2,
         "ga": 0
       },
@@ -1975,7 +1945,6 @@
     "180": "COD",
     "191": "CRO",
     "218": "ECU",
-    "818": "EGY",
     "250": "FRA",
     "276": "GER",
     "288": "GHA",
@@ -1992,6 +1961,7 @@
     "724": "ESP",
     "752": "SWE",
     "756": "SUI",
+    "818": "EGY",
     "826": "ENG",
     "840": "USA"
   }
