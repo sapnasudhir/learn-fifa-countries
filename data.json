@@ -31,12 +31,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Cape Verde Islands",
-        "gf": 3,
-        "ga": 2,
-        "note": "AET"
-      },
       "players": [
         {
           "name": "Enzo Fernández",
@@ -60,7 +54,16 @@
         "history": "Independence declared 1816; birthplace of Che Guevara & Jorge Luis Borges",
         "society": "Birthplace of the tango (UNESCO), Nobel Prize literature, and modern football icons",
         "cuisine": "Asado (wood-fire BBQ), empanadas, dulce de leche & yerba mate"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Cape Verde Islands",
+          "gf": 3,
+          "ga": 2,
+          "note": "AET"
+        }
+      ]
     },
     "AUS": {
       "name": "Australia",
@@ -93,12 +96,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Egypt",
-        "gf": 3,
-        "ga": 5,
-        "note": "pens"
-      },
       "players": [
         {
           "name": "Ajdin Hrustic",
@@ -122,7 +119,17 @@
         "history": "Aboriginal Australians hold the world's oldest continuous culture, dating 65,000+ years",
         "society": "Cate Blanchett, Hugh Jackman & Nick Kyrgios; pioneered women's suffrage (1902)",
         "cuisine": "Meat pies, Vegemite on toast, Tim Tams, barramundi & a renowned coffee culture"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Egypt",
+          "gf": 3,
+          "ga": 5,
+          "note": "pens"
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "AUT": {
       "name": "Austria",
@@ -155,11 +162,6 @@
           "ga": 3
         }
       ],
-      "r32Game": {
-        "opp": "Spain",
-        "gf": 0,
-        "ga": 3
-      },
       "players": [
         {
           "name": "Konrad Laimer",
@@ -183,7 +185,16 @@
         "history": "Habsburg Empire ruled much of Europe for 600 years; birthplace of Mozart & Freud",
         "society": "Classical music capital of the world — home to Mozart, Schubert, Mahler & Strauss",
         "cuisine": "Wiener Schnitzel, Sachertorte, Apfelstrudel & the beloved Viennese coffee house"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Spain",
+          "gf": 0,
+          "ga": 3
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "BEL": {
       "name": "Belgium",
@@ -216,12 +227,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Senegal",
-        "gf": 3,
-        "ga": 2,
-        "note": "AET"
-      },
       "players": [
         {
           "name": "Jérémy Doku",
@@ -245,7 +250,16 @@
         "history": "Battlefield of two World Wars; founding member of the EU, headquartered in Brussels",
         "society": "Surrealist artist René Magritte; Audrey Hepburn's birthplace; EU & NATO HQ",
         "cuisine": "Belgian waffles, moules-frites, over 1,500 beer varieties & the finest chocolate"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Senegal",
+          "gf": 3,
+          "ga": 2,
+          "note": "AET"
+        }
+      ]
     },
     "BIH": {
       "name": "Bosnia & Herz.",
@@ -278,11 +292,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "United States",
-        "gf": 0,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Amar Dedić",
@@ -306,7 +315,16 @@
         "history": "The 1914 Sarajevo assassination triggered WWI; survived the longest siege of a capital in modern warfare (1992–96)",
         "society": "Sarajevo hosted the 1984 Winter Olympics; birthplace of Nobel-adjacent Ivo Andrić",
         "cuisine": "Ćevapi grilled sausages, burek pastry, bosanski lonac stew & strong Bosnian coffee"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "United States",
+          "gf": 0,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "BRA": {
       "name": "Brazil",
@@ -339,11 +357,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Japan",
-        "gf": 2,
-        "ga": 1
-      },
       "players": [
         {
           "name": "Vinícius Jr.",
@@ -367,7 +380,15 @@
         "history": "Colonised by Portugal in 1500; declared independence in 1822 and became a republic in 1889",
         "society": "Carnival, Bossa Nova, Oscar Niemeyer's architecture & the most WC titles (5)",
         "cuisine": "Feijoada black-bean stew, churrasco BBQ, açaí bowls & brigadeiro chocolate truffles"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Japan",
+          "gf": 2,
+          "ga": 1
+        }
+      ]
     },
     "CPV": {
       "name": "Cape Verde",
@@ -400,12 +421,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Argentina",
-        "gf": 2,
-        "ga": 3,
-        "note": "AET"
-      },
       "players": [
         {
           "name": "João Filipe (Jota)",
@@ -429,7 +444,17 @@
         "history": "Uninhabited until Portuguese arrival in 1462; a key hub in the transatlantic slave trade",
         "society": "Cesária Évora's Morna music is UNESCO Intangible Heritage; strong diaspora culture",
         "cuisine": "Cachupa (corn & bean stew), grogue sugarcane rum, fresh tuna & lobster"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Argentina",
+          "gf": 2,
+          "ga": 3,
+          "note": "AET"
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "CAN": {
       "name": "Canada",
@@ -462,11 +487,6 @@
           "ga": 2
         }
       ],
-      "r32Game": {
-        "opp": "South Africa",
-        "gf": 1,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Alphonso Davies",
@@ -490,7 +510,15 @@
         "history": "Confederation in 1867; complex history of reconciliation with Indigenous First Nations",
         "society": "Gave the world ice hockey, Celine Dion, Drake, Jim Carrey & poutine",
         "cuisine": "Poutine (fries, cheese curds, gravy), maple syrup, butter tarts & Montreal smoked meat"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "South Africa",
+          "gf": 1,
+          "ga": 0
+        }
+      ]
     },
     "COD": {
       "name": "Congo DR",
@@ -523,11 +551,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "England",
-        "gf": 1,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Silas Katompa",
@@ -551,7 +574,16 @@
         "history": "Brutally exploited as King Leopold II's private colony; independence from Belgium in 1960",
         "society": "Congolese Rumba is UNESCO World Heritage; Kinshasa is one of Africa's largest cities",
         "cuisine": "Fufu with saka-saka (cassava leaves), moambe chicken & liboke fish in banana leaf"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "England",
+          "gf": 1,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "COL": {
       "name": "Colombia",
@@ -584,11 +616,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Ghana",
-        "gf": 1,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Moisés Caicedo",
@@ -612,7 +639,15 @@
         "history": "Independence from Spain in 1810; birthplace of Nobel laureate Gabriel García Márquez",
         "society": "Magical realism in literature, Shakira's global pop, world's finest emerald producer",
         "cuisine": "Bandeja paisa platter, arepas, ajiaco potato soup & the finest washed-process coffee"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Ghana",
+          "gf": 1,
+          "ga": 0
+        }
+      ]
     },
     "CIV": {
       "name": "Côte d'Ivoire",
@@ -645,11 +680,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Norway",
-        "gf": 1,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Simon Adingra",
@@ -673,7 +703,16 @@
         "history": "French colony until 1960; became the world's leading cocoa producer by the 1970s",
         "society": "Didier Drogba (UNICEF Goodwill Ambassador); world's #1 cocoa exporter",
         "cuisine": "Attieke (cassava couscous), kedjenou chicken, fried plantain & palm-nut sauce"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Norway",
+          "gf": 1,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "CRO": {
       "name": "Croatia",
@@ -706,11 +745,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Portugal",
-        "gf": 1,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Mateo Kovačić",
@@ -734,7 +768,16 @@
         "history": "Part of Yugoslavia until independence in 1991; possible birthplace of Marco Polo",
         "society": "Nikola Tesla (Croatian-Serbian heritage), ties (necktie), Dubrovnik as Game of Thrones filming location",
         "cuisine": "Peka slow-cooked lamb & octopus, black risotto, Dalmatian pršut ham & truffle dishes"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Portugal",
+          "gf": 1,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "DZA": {
       "name": "Algeria",
@@ -767,11 +810,6 @@
           "ga": 3
         }
       ],
-      "r32Game": {
-        "opp": "Switzerland",
-        "gf": 0,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Houssem Aouar",
@@ -795,7 +833,16 @@
         "history": "French colonial rule (1830–1962) ended after a brutal war of independence; Berber civilization predates recorded history",
         "society": "Albert Camus (Nobel laureate) was born in colonial Algeria; Yves Saint Laurent birthplace",
         "cuisine": "Couscous (UNESCO heritage), brik pastry, mechoui slow-roasted lamb & merguez sausage"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Switzerland",
+          "gf": 0,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "ECU": {
       "name": "Ecuador",
@@ -828,11 +875,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Mexico",
-        "gf": 0,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Kendry Páez",
@@ -856,7 +898,16 @@
         "history": "Part of the Inca Empire, then Spanish colony; the equator (Ecuador in Spanish) runs through its capital",
         "society": "Charles Darwin's Galápagos research underpinned evolution theory; Panama hats originated here",
         "cuisine": "Ceviche, llapingachos (potato cakes), seco de pollo stew & fanesca (Easter soup)"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Mexico",
+          "gf": 0,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "EGY": {
       "name": "Egypt",
@@ -889,12 +940,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Australia",
-        "gf": 5,
-        "ga": 3,
-        "note": "pens"
-      },
       "players": [
         {
           "name": "Omar Marmoush",
@@ -918,7 +963,16 @@
         "history": "One of the world's oldest civilisations; Pyramids of Giza are the only remaining Ancient Wonder",
         "society": "Naguib Mahfouz won the Nobel Prize in Literature (1988); ancient Egyptian calendar influenced all modern calendars",
         "cuisine": "Koshari (rice, lentils & pasta), ful medames (fava beans), ta'ameya (falafel) & molokhia soup"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Australia",
+          "gf": 5,
+          "ga": 3,
+          "note": "pens"
+        }
+      ]
     },
     "ENG": {
       "name": "England",
@@ -951,11 +1005,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Congo DR",
-        "gf": 2,
-        "ga": 1
-      },
       "players": [
         {
           "name": "Jude Bellingham",
@@ -979,7 +1028,15 @@
         "history": "Magna Carta (1215) pioneered constitutional law; birthplace of the Industrial Revolution",
         "society": "Shakespeare, Newton, Darwin, The Beatles, the Premier League & the World Wide Web (Tim Berners-Lee)",
         "cuisine": "Fish & chips, full English breakfast, Sunday roast, sticky toffee pudding & chicken tikka masala"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Congo DR",
+          "gf": 2,
+          "ga": 1
+        }
+      ]
     },
     "FRA": {
       "name": "France",
@@ -1012,11 +1069,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Sweden",
-        "gf": 3,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Kylian Mbappé",
@@ -1040,7 +1092,15 @@
         "history": "French Revolution (1789) birthed modern democracy; Napoleon reshaped European law & borders",
         "society": "Monet, Picasso (adopted), Camus, Dior & Chanel; the Louvre holds the world's largest art collection",
         "cuisine": "Baguette, croissant, coq au vin, 1,200+ cheese varieties & the world's most celebrated wine regions"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Sweden",
+          "gf": 3,
+          "ga": 0
+        }
+      ]
     },
     "GER": {
       "name": "Germany",
@@ -1073,12 +1133,6 @@
           "ga": 2
         }
       ],
-      "r32Game": {
-        "opp": "Paraguay",
-        "gf": 4,
-        "ga": 5,
-        "note": "pens"
-      },
       "players": [
         {
           "name": "Florian Wirtz",
@@ -1102,7 +1156,17 @@
         "history": "Unification in 1871; WWI/WWII originator; Berlin Wall's fall in 1989 reunified the nation",
         "society": "Beethoven, Bach, Goethe, Einstein, Gutenberg & the invention of the automobile (Benz)",
         "cuisine": "Bratwurst, pretzels, sauerkraut, Black Forest cake, Bavarian beer & over 300 bread varieties"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Paraguay",
+          "gf": 4,
+          "ga": 5,
+          "note": "pens"
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "GHA": {
       "name": "Ghana",
@@ -1135,11 +1199,6 @@
           "ga": 2
         }
       ],
-      "r32Game": {
-        "opp": "Colombia",
-        "gf": 0,
-        "ga": 1
-      },
       "players": [
         {
           "name": "Mohammed Kudus",
@@ -1163,7 +1222,16 @@
         "history": "First sub-Saharan African country to gain independence (1957); formerly the British Gold Coast",
         "society": "Kofi Annan (UN Secretary-General), kente cloth weaving & the rise of Afrobeats music",
         "cuisine": "Jollof rice, fufu with groundnut soup, kelewele (spiced fried plantain) & waakye"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Colombia",
+          "gf": 0,
+          "ga": 1
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "JPN": {
       "name": "Japan",
@@ -1196,11 +1264,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Brazil",
-        "gf": 1,
-        "ga": 2
-      },
       "players": [
         {
           "name": "Takefusa Kubo",
@@ -1224,7 +1287,16 @@
         "history": "Meiji Restoration (1868) rapidly modernised the nation; post-WWII became the world's 3rd largest economy",
         "society": "Toyota, Sony, Nintendo, anime, manga & the Michelin-starred restaurant capital of the world",
         "cuisine": "Sushi, ramen, tempura, wagyu beef, matcha & the art of kaiseki multi-course dining"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Brazil",
+          "gf": 1,
+          "ga": 2
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "MEX": {
       "name": "Mexico",
@@ -1257,11 +1329,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Ecuador",
-        "gf": 2,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Santi Giménez",
@@ -1285,7 +1352,15 @@
         "history": "Aztec Empire (Tenochtitlán) conquered by Spain in 1521; Revolution of 1910 shaped modern democracy",
         "society": "Frida Kahlo, Diego Rivera, Octavio Paz (Nobel Literature) & Day of the Dead (UNESCO Heritage)",
         "cuisine": "Tacos, mole sauce, guacamole (origin), tamales & the birthplace of chocolate & chilli peppers"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Ecuador",
+          "gf": 2,
+          "ga": 0
+        }
+      ]
     },
     "MAR": {
       "name": "Morocco",
@@ -1318,12 +1393,6 @@
           "ga": 2
         }
       ],
-      "r32Game": {
-        "opp": "Netherlands",
-        "gf": 4,
-        "ga": 3,
-        "note": "pens"
-      },
       "players": [
         {
           "name": "Achraf Hakimi",
@@ -1347,7 +1416,16 @@
         "history": "Fes (est. 859 AD) contains the world's oldest university; major bridge between Africa and Europe",
         "society": "Ibn Battuta (greatest medieval explorer), argan oil industry & vibrant Amazigh (Berber) culture",
         "cuisine": "Tagine slow-cooked stew, couscous Friday, mint tea ceremony, pastilla pigeon pie & harira soup"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Netherlands",
+          "gf": 4,
+          "ga": 3,
+          "note": "pens"
+        }
+      ]
     },
     "NED": {
       "name": "Netherlands",
@@ -1380,12 +1458,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Morocco",
-        "gf": 3,
-        "ga": 4,
-        "note": "pens"
-      },
       "players": [
         {
           "name": "Cody Gakpo",
@@ -1409,7 +1481,17 @@
         "history": "Dutch Golden Age (17th c.) made it the world's dominant trading empire; Anne Frank hid in Amsterdam",
         "society": "Rembrandt, Vermeer, Van Gogh, Spinoza, Erasmus; invented the stock market & the telescope",
         "cuisine": "Stroopwafel, raw herring (haring), stamppot mash, Gouda & Edam cheese & poffertjes pancakes"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Morocco",
+          "gf": 3,
+          "ga": 4,
+          "note": "pens"
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "NOR": {
       "name": "Norway",
@@ -1442,11 +1524,6 @@
           "ga": 4
         }
       ],
-      "r32Game": {
-        "opp": "Ivory Coast",
-        "gf": 2,
-        "ga": 1
-      },
       "players": [
         {
           "name": "Erling Haaland",
@@ -1470,7 +1547,15 @@
         "history": "Vikings (800–1100 AD) explored from North America to Russia; Nobel Peace Prize is awarded in Oslo",
         "society": "Edvard Munch (The Scream), Henrik Ibsen, Grieg & the world's highest standard of living (HDI)",
         "cuisine": "Salmon (gravlax & smoked), brunost (brown whey cheese), smørbrød open sandwiches & lutefisk"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Ivory Coast",
+          "gf": 2,
+          "ga": 1
+        }
+      ]
     },
     "PAR": {
       "name": "Paraguay",
@@ -1503,12 +1588,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Germany",
-        "gf": 5,
-        "ga": 4,
-        "note": "pens"
-      },
       "players": [
         {
           "name": "Julio Enciso",
@@ -1532,7 +1611,16 @@
         "history": "The War of the Triple Alliance (1864–70) devastated Paraguay, killing ~60% of its population",
         "society": "One of the most bilingual nations — Spanish & Guaraní are equally co-official languages",
         "cuisine": "Sopa paraguaya (cornbread), chipa cheese bread, mbejú starch flatbread & tereré cold herbal drink"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Germany",
+          "gf": 5,
+          "ga": 4,
+          "note": "pens"
+        }
+      ]
     },
     "POR": {
       "name": "Portugal",
@@ -1565,11 +1653,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Croatia",
-        "gf": 2,
-        "ga": 1
-      },
       "players": [
         {
           "name": "Rafael Leão",
@@ -1593,7 +1676,15 @@
         "history": "Age of Discovery — Vasco da Gama, Magellan & Cabral built the first global empire in the 15th–16th c.",
         "society": "Fado music (UNESCO), Fernando Pessoa (poetry), Cristiano Ronaldo & world's largest cork supplier (50%)",
         "cuisine": "Pastéis de nata custard tarts, bacalhau salt-cod (365 recipes), caldo verde soup & Vinho Verde"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Croatia",
+          "gf": 2,
+          "ga": 1
+        }
+      ]
     },
     "SEN": {
       "name": "Senegal",
@@ -1626,12 +1717,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Belgium",
-        "gf": 2,
-        "ga": 3,
-        "note": "AET"
-      },
       "players": [
         {
           "name": "Nicolas Jackson",
@@ -1655,7 +1740,17 @@
         "history": "Gorée Island was a major transatlantic slave-trade departure point; independence from France in 1960",
         "society": "Léopold Sédar Senghor (poet-president), Youssou N'Dour (music legend) & laamb wrestling culture",
         "cuisine": "Thiéboudienne (UNESCO: fish & rice national dish), yassa lemon chicken, mafé peanut stew & bissap drink"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Belgium",
+          "gf": 2,
+          "ga": 3,
+          "note": "AET"
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "ZAF": {
       "name": "South Africa",
@@ -1688,11 +1783,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Canada",
-        "gf": 0,
-        "ga": 1
-      },
       "players": [
         {
           "name": "Percy Tau",
@@ -1716,7 +1806,16 @@
         "history": "Apartheid system (1948–1994) ended peacefully; Nelson Mandela served 27 years in prison before becoming president",
         "society": "Mandela, Desmond Tutu, Elon Musk (birthplace) & ubuntu philosophy (\"I am because we are\")",
         "cuisine": "Braai (BBQ gathering), biltong dried meat, bobotie minced-meat bake & bunny chow curry bread bowl"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Canada",
+          "gf": 0,
+          "ga": 1
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "ESP": {
       "name": "Spain",
@@ -1749,11 +1848,6 @@
           "ga": 0
         }
       ],
-      "r32Game": {
-        "opp": "Austria",
-        "gf": 3,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Lamine Yamal",
@@ -1777,7 +1871,15 @@
         "history": "Spanish Empire (15th–19th c.) colonised the Americas; Cervantes wrote Don Quixote, the first modern novel",
         "society": "Picasso, Dalí, Velázquez, Gaudí, Lorca & Almodovar — unmatched artistic legacy",
         "cuisine": "Paella, tapas culture, jamón ibérico, gazpacho cold soup, churros & La Rioja wines"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Austria",
+          "gf": 3,
+          "ga": 0
+        }
+      ]
     },
     "SWE": {
       "name": "Sweden",
@@ -1810,11 +1912,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "France",
-        "gf": 0,
-        "ga": 3
-      },
       "players": [
         {
           "name": "Alexander Isak",
@@ -1838,7 +1935,16 @@
         "history": "Over 200 years of unbroken peace; Vikings (800–1100 AD) explored from Greenland to Baghdad",
         "society": "ABBA, IKEA, Spotify, H&M, Volvo & Alfred Nobel who funded the Nobel Prizes",
         "cuisine": "Swedish meatballs with lingonberry, gravlax, surströmming (fermented herring), smörgåsbord & Princess cake"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "France",
+          "gf": 0,
+          "ga": 3
+        }
+      ],
+      "eliminatedIn": "R32"
     },
     "SUI": {
       "name": "Switzerland",
@@ -1871,11 +1977,6 @@
           "ga": 1
         }
       ],
-      "r32Game": {
-        "opp": "Algeria",
-        "gf": 2,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Granit Xhaka",
@@ -1899,7 +2000,15 @@
         "history": "Founded in 1291, Switzerland has maintained armed neutrality for over 500 years; Red Cross founded in Geneva (1863)",
         "society": "Roger Federer, Le Corbusier, Jean-Jacques Rousseau, CERN (particle physics) & HQ of the UN & Red Cross",
         "cuisine": "Fondue, raclette, rösti potato cake, Swiss chocolate (Lindt, Toblerone) & Bircher muesli"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Algeria",
+          "gf": 2,
+          "ga": 0
+        }
+      ]
     },
     "USA": {
       "name": "United States",
@@ -1932,11 +2041,6 @@
           "ga": 3
         }
       ],
-      "r32Game": {
-        "opp": "Bosnia-Herzegovina",
-        "gf": 2,
-        "ga": 0
-      },
       "players": [
         {
           "name": "Folarin Balogun",
@@ -1960,7 +2064,15 @@
         "history": "Independence declared 1776; Moon landing in 1969; led the Allied victory in WWII",
         "society": "Hollywood, Silicon Valley (Apple, Google, Meta), jazz, hip-hop & NASA's space programme",
         "cuisine": "BBQ (regional styles), clam chowder, Philly cheesesteak, apple pie & the all-American burger"
-      }
+      },
+      "knockout": [
+        {
+          "stage": "R32",
+          "opp": "Bosnia-Herzegovina",
+          "gf": 2,
+          "ga": 0
+        }
+      ]
     }
   },
   "ISO_MAP": {

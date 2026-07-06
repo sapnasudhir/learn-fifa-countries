@@ -4,16 +4,21 @@
 //
 // Requires FOOTBALL_DATA_API_KEY in the environment. Run with: node scripts/update-data.js
 //
-// NOTE: football-data.org's `stage` value for the World Cup 2026 Round of 32
-// is `LAST_32` -- confirmed 2026-07-06 via a diagnostic run showing exactly
-// 16 FINISHED LAST_32 matches (the right count for 32 teams) vs. 4 FINISHED
-// LAST_16 matches (the *next* stage, Round of 16, partially played so far).
-// An earlier version of this file briefly had this backwards (set to
-// ['LAST_16']) after a single ambiguous run, which incorrectly wrote 8 real
-// teams' r32Game/status from Round-of-16 results instead of Round-of-32 --
-// fixed by this commit. If football-data.org's naming changes again, check
-// the "Unrecognized stage values" log and the per-stage match-count
-// diagnostic below before changing this.
+// Tracks the full knockout bracket (Round of 32 through the Final), not just
+// Round of 32. Each team's `knockout` array holds one entry per stage it has
+// played, in STAGE_ORDER; `status` is either the furthest stage the team has
+// advanced TO (i.e. the next stage after their last win), `'OUT'` (with
+// `eliminatedIn` set to the stage they lost in), or `'CHAMPION'` if they won
+// the Final.
+//
+// STAGE_API_NAMES confirmed so far (via live diagnostic runs, 2026-07-06):
+//   R32 = 'LAST_32', R16 = 'LAST_16'.
+// QF/SF/F candidate names below are UNCONFIRMED guesses (football-data.org
+// used LAST_32/LAST_16 rather than the more generic ROUND_OF_32/SEMI_FINALS
+// naming their own docs suggested elsewhere, so don't assume the pattern
+// continues) -- check the "Unrecognized stage values" / per-stage match
+// count diagnostic log on each run and add the real names here once those
+// rounds actually have finished matches.
 
 const fs = require('fs');
 const path = require('path');
@@ -23,7 +28,22 @@ const COMPETITION_CODE = 'WC'; // football-data.org code for FIFA World Cup (con
 const API_BASE = 'https://api.football-data.org/v4';
 
 const GROUP_STAGE_NAMES = ['GROUP_STAGE'];
-const R32_STAGE_NAMES = ['LAST_32'];
+
+const STAGE_ORDER = ['R32', 'R16', 'QF', 'SF', 'F'];
+const STAGE_API_NAMES = {
+  R32: ['LAST_32'],
+  R16: ['LAST_16'],
+  QF: ['LAST_8', 'QUARTER_FINALS', 'QUARTERFINALS'],
+  SF: ['LAST_4', 'SEMI_FINALS', 'SEMIFINALS'],
+  F: ['FINAL'],
+};
+
+function stageForApiValue(apiStage) {
+  for (const [stage, names] of Object.entries(STAGE_API_NAMES)) {
+    if (names.includes(apiStage)) return stage;
+  }
+  return null;
+}
 
 // Our TEAMS keys vs. football-data.org's team `name`/`shortName` don't always
 // match by naive substring -- seed known mismatches here. Left side is our
@@ -77,19 +97,24 @@ function resultNote(match) {
 function applyLiveData(teams, matches, matchTeam) {
   const unrecognizedStages = new Set();
   const unmatchedTeams = new Set();
-  const stageCounts = new Map(); // diagnostic: every distinct stage seen among FINISHED matches, and how many involve a known team
-  const r32TeamsSeen = new Set(); // diagnostic: which of our 32 codes actually got an R32_STAGE_NAMES match this run
-  // Group-stage results are staged here, keyed by our team code, and only
-  // written into `teams` for codes that actually had a finished match this
-  // run -- so a team we fail to match (bad override, API hiccup, whatever)
-  // keeps its last-known-good data instead of being silently zeroed out.
-  const groupResults = new Map();
+  const stageCounts = new Map(); // diagnostic: every distinct stage seen among FINISHED matches involving a known team
+
+  // Both staged separately from `teams` and only written back for codes
+  // actually seen this run -- so a team we fail to match (bad override, API
+  // hiccup, whatever) keeps its last-known-good data instead of being
+  // silently zeroed/reset.
+  const groupResults = new Map(); // code -> { games, w, d, l, gf, ga }
+  const knockoutResults = new Map(); // code -> Map(stage -> entry)
 
   function groupResultFor(code) {
     if (!groupResults.has(code)) {
       groupResults.set(code, { games: [], w: 0, d: 0, l: 0, gf: 0, ga: 0 });
     }
     return groupResults.get(code);
+  }
+  function knockoutResultFor(code) {
+    if (!knockoutResults.has(code)) knockoutResults.set(code, new Map());
+    return knockoutResults.get(code);
   }
 
   for (const match of matches) {
@@ -121,23 +146,28 @@ function applyLiveData(teams, matches, matchTeam) {
         g.gf += away; g.ga += home;
         if (away > home) g.w++; else if (away < home) g.l++; else g.d++;
       }
-    } else if (R32_STAGE_NAMES.includes(match.stage)) {
-      const note = resultNote(match);
-      // `winner` is authoritative (covers AET/penalties); fall back to fullTime score only if absent.
-      const winnerSide = match.score.winner || (home > away ? 'HOME' : away > home ? 'AWAY' : null);
+      continue;
+    }
 
-      if (homeCode && teams[homeCode]) {
-        teams[homeCode].r32Game = { opp: match.awayTeam.name, gf: home, ga: away, ...(note ? { note } : {}) };
-        teams[homeCode].status = winnerSide === 'HOME' ? 'R16' : winnerSide === 'AWAY' ? 'OUT' : teams[homeCode].status;
-        r32TeamsSeen.add(homeCode);
-      }
-      if (awayCode && teams[awayCode]) {
-        teams[awayCode].r32Game = { opp: match.homeTeam.name, gf: away, ga: home, ...(note ? { note } : {}) };
-        teams[awayCode].status = winnerSide === 'AWAY' ? 'R16' : winnerSide === 'HOME' ? 'OUT' : teams[awayCode].status;
-        r32TeamsSeen.add(awayCode);
-      }
-    } else {
+    const stage = stageForApiValue(match.stage);
+    if (!stage) {
       unrecognizedStages.add(match.stage);
+      continue;
+    }
+
+    const note = resultNote(match);
+    // `winner` is authoritative (covers AET/penalties); fall back to fullTime score only if absent.
+    const winnerSide = match.score.winner || (home > away ? 'HOME' : away > home ? 'AWAY' : null);
+
+    if (homeCode && teams[homeCode]) {
+      knockoutResultFor(homeCode).set(stage, {
+        stage, opp: match.awayTeam.name, gf: home, ga: away, ...(note ? { note } : {}), _won: winnerSide === 'HOME',
+      });
+    }
+    if (awayCode && teams[awayCode]) {
+      knockoutResultFor(awayCode).set(stage, {
+        stage, opp: match.homeTeam.name, gf: away, ga: home, ...(note ? { note } : {}), _won: winnerSide === 'AWAY',
+      });
     }
   }
 
@@ -145,9 +175,25 @@ function applyLiveData(teams, matches, matchTeam) {
     Object.assign(teams[code], g);
   }
 
-  const staleTeams = Object.keys(teams).filter((code) => !groupResults.has(code));
-  if (staleTeams.length) {
-    console.warn('No finished group-stage matches found this run for (left unchanged):', staleTeams);
+  for (const [code, stageMap] of knockoutResults) {
+    const entries = STAGE_ORDER.filter((s) => stageMap.has(s)).map((s) => stageMap.get(s));
+    const furthest = entries[entries.length - 1];
+    const team = teams[code];
+
+    team.knockout = entries.map(({ _won, ...rest }) => rest);
+    if (furthest._won) {
+      const nextIdx = STAGE_ORDER.indexOf(furthest.stage) + 1;
+      team.status = nextIdx < STAGE_ORDER.length ? STAGE_ORDER[nextIdx] : 'CHAMPION';
+      delete team.eliminatedIn;
+    } else {
+      team.status = 'OUT';
+      team.eliminatedIn = furthest.stage;
+    }
+  }
+
+  const staleGroupTeams = Object.keys(teams).filter((code) => !groupResults.has(code));
+  if (staleGroupTeams.length) {
+    console.warn('No finished group-stage matches found this run for (left unchanged):', staleGroupTeams);
   }
   if (unrecognizedStages.size) {
     console.warn('Unrecognized stage values (matches skipped):', [...unrecognizedStages]);
@@ -156,7 +202,8 @@ function applyLiveData(teams, matches, matchTeam) {
     console.warn('API teams that did not match any data.json team (add to NAME_OVERRIDES):', [...unmatchedTeams]);
   }
   console.log('Diagnostic -- FINISHED matches per stage (only counting ones involving a known team):', Object.fromEntries(stageCounts));
-  console.log('Diagnostic -- our team codes with an R32_STAGE_NAMES match this run:', [...r32TeamsSeen]);
+  console.log('Diagnostic -- our team codes with a knockout-stage match this run, by stage:',
+    Object.fromEntries(STAGE_ORDER.map((s) => [s, [...knockoutResults].filter(([, m]) => m.has(s)).map(([code]) => code)])));
 }
 
 async function main() {

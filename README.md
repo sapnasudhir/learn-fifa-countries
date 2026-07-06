@@ -2,7 +2,7 @@
 
 ## Overview
 
-A full-screen interactive world map visualising all 32 nations that reached the Round of 32 at FIFA World Cup 2026. Countries are colour-coded by squad market value, clickable to open a side panel with group-stage results, Round of 32 match, W/D/L record, squad value bar, top 3 players by value, and five country-fact categories.
+A full-screen interactive world map visualising all 32 nations that reached the Round of 32 at FIFA World Cup 2026. Countries are colour-coded by squad market value, clickable to open a side panel with group-stage results, full knockout-stage progression (Round of 32 through the Final), W/D/L record, squad value bar, top 3 players by value, and five country-fact categories.
 
 ---
 
@@ -60,7 +60,11 @@ To update: re-download a fresh Standalone export from Claude Design (see "Updati
 
 To hand-edit match data now: edit `data.json` directly. It's plain JSON — `{"TEAMS": {...}, "ISO_MAP": {...}}` — keyed the same way as before (3-letter team codes, numeric TopoJSON IDs), just with quoted keys/strings instead of the original JS object-literal syntax.
 
-**Live updates:** a scheduled GitHub Actions workflow (`.github/workflows/update-data.yml`) polls the football-data.org API and rewrites `data.json` automatically, merging in only the fields that actually change during the tournament — `w`/`d`/`l`, `gf`/`ga`, `games`, `r32Game`, and `status`. Squad value, top players, and country facts are not covered by that API and stay hand-curated in `data.json`. See the workflow file and its update script for the exact mapping; it requires a `FOOTBALL_DATA_API_KEY` repo secret to run.
+**Knockout progression schema:** each team's bracket results live in a `knockout` array, one entry per stage played so far — `{"stage": "R32"|"R16"|"QF"|"SF"|"F", "opp": ..., "gf": ..., "ga": ..., "note"?: "AET"|"pens"}`, in chronological order. `status` is one of: the stage a team has *advanced to* (`"R16"` means "won Round of 32, now in Round of 16", etc.), `"OUT"` (eliminated — see `eliminatedIn` for which stage), or `"CHAMPION"` (won the Final). The side panel renders the whole `knockout` array as a "KNOCKOUT STAGE" list, so a team eliminated in the Round of 16 shows both its Round-of-32 win and Round-of-16 loss.
+
+**Live updates:** a scheduled GitHub Actions workflow (`.github/workflows/update-data.yml`) polls the football-data.org API and rewrites `data.json` automatically, merging in only the fields that actually change during the tournament — group-stage `w`/`d`/`l`/`gf`/`ga`/`games`, and the `knockout`/`status`/`eliminatedIn` fields above, built up incrementally as each round finishes. Squad value, top players, and country facts are not covered by that API and stay hand-curated in `data.json`. See the workflow file and its update script for the exact mapping; it requires a `FOOTBALL_DATA_API_KEY` repo secret to run.
+
+football-data.org's `stage` values confirmed so far (via live runs, 2026-07-06): `R32 = LAST_32`, `R16 = LAST_16`. The QF/SF/F stage names in the script are unconfirmed guesses (`LAST_8`/`QUARTER_FINALS`, `LAST_4`/`SEMI_FINALS`, `FINAL`) since no matches had reached those rounds yet when this was written — the script logs a per-stage match-count diagnostic on every run specifically so a wrong guess is easy to catch (an unexpectedly-large "unrecognized stage" count, or a `0`-team match at a stage that should have real teams) rather than silently mis-filing results the way the R32/R16 mix-up briefly did.
 
 If the underlying design itself changes (colors, layout, new interactions — not just match results), the right move is still to go back to Claude Design and re-download a fresh Standalone export, then re-run the same extraction pass to regenerate `data.json` and re-wire the fetch.
 
