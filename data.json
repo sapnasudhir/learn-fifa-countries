@@ -279,7 +279,7 @@
         }
       ],
       "r32Game": {
-        "opp": "USA",
+        "opp": "United States",
         "gf": 0,
         "ga": 2
       },
@@ -340,9 +340,9 @@
         }
       ],
       "r32Game": {
-        "opp": "Norway",
-        "gf": 1,
-        "ga": 2
+        "opp": "Japan",
+        "gf": 2,
+        "ga": 1
       },
       "players": [
         {
@@ -463,9 +463,9 @@
         }
       ],
       "r32Game": {
-        "opp": "Morocco",
-        "gf": 0,
-        "ga": 3
+        "opp": "South Africa",
+        "gf": 1,
+        "ga": 0
       },
       "players": [
         {
@@ -952,9 +952,9 @@
         }
       ],
       "r32Game": {
-        "opp": "Mexico",
-        "gf": 3,
-        "ga": 2
+        "opp": "Congo DR",
+        "gf": 2,
+        "ga": 1
       },
       "players": [
         {
@@ -1013,8 +1013,8 @@
         }
       ],
       "r32Game": {
-        "opp": "Paraguay",
-        "gf": 1,
+        "opp": "Sweden",
+        "gf": 3,
         "ga": 0
       },
       "players": [
@@ -1258,9 +1258,9 @@
         }
       ],
       "r32Game": {
-        "opp": "England",
+        "opp": "Ecuador",
         "gf": 2,
-        "ga": 3
+        "ga": 0
       },
       "players": [
         {
@@ -1319,9 +1319,10 @@
         }
       ],
       "r32Game": {
-        "opp": "Canada",
-        "gf": 3,
-        "ga": 0
+        "opp": "Netherlands",
+        "gf": 4,
+        "ga": 3,
+        "note": "pens"
       },
       "players": [
         {
@@ -1442,7 +1443,7 @@
         }
       ],
       "r32Game": {
-        "opp": "Brazil",
+        "opp": "Ivory Coast",
         "gf": 2,
         "ga": 1
       },
@@ -1503,9 +1504,10 @@
         }
       ],
       "r32Game": {
-        "opp": "France",
-        "gf": 0,
-        "ga": 1
+        "opp": "Germany",
+        "gf": 5,
+        "ga": 4,
+        "note": "pens"
       },
       "players": [
         {
