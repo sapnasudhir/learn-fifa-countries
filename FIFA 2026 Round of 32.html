@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <style>
+    body { margin:0; overflow:hidden; background:#06090f; }
+    @keyframes panelIn { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    ::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:#0a1422; } ::-webkit-scrollbar-thumb { background:#1e3a5f; border-radius:2px; }
+  </style>
+</helmet>
+
+<div style="width:100vw; height:100vh; display:flex; flex-direction:column; background:#06090f; color:white; font-family:'Barlow',sans-serif; overflow:hidden;">
+
+  <!-- HEADER -->
+  <div style="height:58px; background:rgba(0,0,0,0.6); border-bottom:1px solid rgba(240,184,64,0.12); display:flex; align-items:center; padding:0 28px; gap:20px; flex-shrink:0; backdrop-filter:blur(10px);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div style="width:36px; height:36px; border:2px solid #f0b840; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;"><span style="font-size:18px; line-height:1;">⚽</span></div>
+      <div>
+        <div style="font-family:'Barlow Condensed'; font-size:19px; font-weight:900; letter-spacing:2.5px; color:#f0b840; line-height:1.1;">FIFA WORLD CUP 2026™</div>
+        <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:3px; color:rgba(255,255,255,0.4); line-height:1; margin-top:1px;">ROUND OF 32 · INTERACTIVE MAP</div>
+      </div>
+    </div>
+    <div style="width:1px; height:32px; background:rgba(255,255,255,0.08);"></div>
+    <div style="font-family:'Barlow Condensed'; font-size:12px; letter-spacing:1.5px; color:rgba(255,255,255,0.35);">32 NATIONS · JUNE 28 – JULY 3, 2026</div>
+    <div style="margin-left:auto; display:flex; align-items:center; gap:16px;">
+      <div style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:#f0b840; border-radius:2px;"></div><span style="font-family:'Barlow Condensed'; font-size:10px; letter-spacing:1px; color:rgba(255,255,255,0.4);">€500M+</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:#d07c10; border-radius:2px;"></div><span style="font-family:'Barlow Condensed'; font-size:10px; letter-spacing:1px; color:rgba(255,255,255,0.4);">€200M+</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:#a85c18; border-radius:2px;"></div><span style="font-family:'Barlow Condensed'; font-size:10px; letter-spacing:1px; color:rgba(255,255,255,0.4);">€100M+</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div style="width:10px; height:10px; background:#6e3e18; border-radius:2px;"></div><span style="font-family:'Barlow Condensed'; font-size:10px; letter-spacing:1px; color:rgba(255,255,255,0.4);">&lt;€100M</span></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div style="flex:1; position:relative; overflow:hidden;">
+    <div id="map-container" style="position:absolute; inset:0;"></div>
+
+    <!-- ZOOM CONTROLS -->
+    <div style="position:absolute; bottom:28px; left:20px; display:flex; flex-direction:column; gap:4px; z-index:10;">
+      <button onClick="{{ zoomIn }}" title="Zoom in" style="width:36px; height:36px; background:rgba(7,11,20,0.92); border:1px solid rgba(240,184,64,0.3); color:#f0b840; border-radius:6px; font-size:20px; font-weight:300; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px);" style-hover="background:rgba(240,184,64,0.12); border-color:rgba(240,184,64,0.6);">+</button>
+      <button onClick="{{ resetZoom }}" title="Reset zoom" style="width:36px; height:36px; background:rgba(7,11,20,0.92); border:1px solid rgba(240,184,64,0.3); color:#f0b840; border-radius:6px; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed'; font-weight:700; backdrop-filter:blur(6px);" style-hover="background:rgba(240,184,64,0.12); border-color:rgba(240,184,64,0.6);">⊙</button>
+      <button onClick="{{ zoomOut }}" title="Zoom out" style="width:36px; height:36px; background:rgba(7,11,20,0.92); border:1px solid rgba(240,184,64,0.3); color:#f0b840; border-radius:6px; font-size:20px; font-weight:300; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(6px);" style-hover="background:rgba(240,184,64,0.12); border-color:rgba(240,184,64,0.6);">−</button>
+    </div>
+    <div style="position:absolute; bottom:36px; left:62px; font-family:'Barlow Condensed'; font-size:9px; color:rgba(255,255,255,0.22); letter-spacing:1.5px; pointer-events:none; user-select:none;">SCROLL · ZOOM · DRAG</div>
+
+    <!-- INSTRUCTION -->
+    <sc-if value="{{ noCountry }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute; bottom:28px; left:50%; transform:translateX(-50%); background:rgba(6,9,15,0.88); border:1px solid rgba(240,184,64,0.18); border-radius:6px; padding:9px 22px; white-space:nowrap; pointer-events:none; animation:fadeUp 0.6s ease 1.2s both;">
+        <span style="font-family:'Barlow Condensed'; font-size:12px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.45);">CLICK ANY HIGHLIGHTED COUNTRY TO VIEW STATS</span>
+      </div>
+    </sc-if>
+
+    <!-- INFO PANEL -->
+    <sc-if value="{{ hasCountry }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute; top:0; right:0; bottom:0; width:400px; background:rgba(7,11,20,0.97); border-left:1px solid rgba(240,184,64,0.12); overflow-y:auto; animation:panelIn 0.3s ease; display:flex; flex-direction:column;">
+
+        <!-- Flag Banner -->
+        <div style="position:relative; height:72px; overflow:hidden; flex-shrink:0;">
+          <div style="position:absolute; inset:0; background-image:url({{ flagUrl }}); background-size:cover; background-position:center; opacity:0.22; filter:blur(5px); transform:scale(1.08);"></div>
+          <div style="position:absolute; inset:0; background:linear-gradient(transparent 20%, rgba(7,11,20,0.97));"></div>
+          <button onClick="{{ closePanel }}" title="Close" style="position:absolute; top:12px; right:14px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.55); width:28px; height:28px; border-radius:50%; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; z-index:2;" style-hover="background:rgba(255,255,255,0.14);">×</button>
+        </div>
+
+        <!-- Tier stripe -->
+        <div style="height:3px; background:{{ tierColor }}; flex-shrink:0;"></div>
+
+        <!-- Country Header -->
+        <div style="padding:16px 20px 14px; flex-shrink:0;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+            <div style="height:42px; width:64px; background-image:url({{ flagUrl }}); background-size:cover; background-position:center; border-radius:3px; border:1px solid rgba(255,255,255,0.15); flex-shrink:0; box-shadow:0 2px 10px rgba(0,0,0,0.5);"></div>
+            <div style="min-width:0;">
+              <div style="font-family:'Barlow Condensed'; font-size:26px; font-weight:900; line-height:1; color:white; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ countryName }}</div>
+              <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.38); margin-top:3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ capitalLine }}</div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <div style="display:inline-flex; align-items:center; gap:6px; padding:4px 11px; border-radius:4px; background:{{ r32BadgeBg }};">
+              <div style="width:5px; height:5px; border-radius:50%; background:{{ r32BadgeColor }};"></div>
+              <span style="font-family:'Barlow Condensed'; font-size:10px; font-weight:700; letter-spacing:1.5px; color:{{ r32BadgeColor }};">{{ r32BadgeLabel }}</span>
+            </div>
+            <div style="font-family:'Barlow Condensed'; font-size:10px; letter-spacing:1.5px; color:rgba(255,255,255,0.28);">GROUP {{ countryGroup }} · {{ countryPosLabel }}</div>
+          </div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.06); margin:0 20px; flex-shrink:0;"></div>
+
+        <!-- MATCHES -->
+        <div style="padding:14px 20px; flex-shrink:0;">
+          <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.3); margin-bottom:8px;">GROUP STAGE MATCHES</div>
+          <sc-for list="{{ groupGames }}" as="gm" hint-placeholder-count="3">
+            <div style="display:flex; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="width:20px; height:18px; border-radius:3px; background:{{ gm.bgColor }}; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span style="font-family:'Barlow Condensed'; font-size:11px; font-weight:900; color:{{ gm.txtColor }}; line-height:1;">{{ gm.result }}</span>
+              </div>
+              <span style="font-family:'Barlow'; font-size:12px; color:rgba(255,255,255,0.55); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">vs {{ gm.opp }}</span>
+              <span style="font-family:'Barlow Condensed'; font-size:14px; font-weight:700; color:white; flex-shrink:0; letter-spacing:0.5px;">{{ gm.score }}</span>
+            </div>
+          </sc-for>
+          <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.3); margin-top:10px; margin-bottom:8px;">ROUND OF 32</div>
+          <div style="display:flex; align-items:center; gap:8px; padding:6px 0;">
+            <div style="width:20px; height:18px; border-radius:3px; background:{{ r32BgColor }}; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <span style="font-family:'Barlow Condensed'; font-size:11px; font-weight:900; color:{{ r32TxtColor }}; line-height:1;">{{ r32Result }}</span>
+            </div>
+            <span style="font-family:'Barlow'; font-size:12px; color:rgba(255,255,255,0.55); flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">vs {{ r32Opp }}</span>
+            <span style="font-family:'Barlow Condensed'; font-size:14px; font-weight:700; color:white; flex-shrink:0; letter-spacing:0.5px;">{{ r32ScoreStr }}</span>
+          </div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.06); margin:0 20px; flex-shrink:0;"></div>
+
+        <!-- W/D/L RECORD -->
+        <div style="padding:14px 20px; flex-shrink:0;">
+          <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.3); margin-bottom:10px;">GROUP STAGE RECORD</div>
+          <div style="display:flex; gap:6px;">
+            <div style="flex:1; background:rgba(74,222,128,0.06); border:1px solid rgba(74,222,128,0.12); border-radius:6px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'Barlow Condensed'; font-size:26px; font-weight:900; color:#4ade80; line-height:1;">{{ wins }}</div>
+              <div style="font-family:'Barlow Condensed'; font-size:9px; font-weight:700; letter-spacing:1.5px; color:rgba(74,222,128,0.5); margin-top:3px;">WINS</div>
+            </div>
+            <div style="flex:1; background:rgba(250,204,21,0.06); border:1px solid rgba(250,204,21,0.12); border-radius:6px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'Barlow Condensed'; font-size:26px; font-weight:900; color:#facc15; line-height:1;">{{ draws }}</div>
+              <div style="font-family:'Barlow Condensed'; font-size:9px; font-weight:700; letter-spacing:1.5px; color:rgba(250,204,21,0.5); margin-top:3px;">DRAWS</div>
+            </div>
+            <div style="flex:1; background:rgba(248,113,113,0.06); border:1px solid rgba(248,113,113,0.12); border-radius:6px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'Barlow Condensed'; font-size:26px; font-weight:900; color:#f87171; line-height:1;">{{ losses }}</div>
+              <div style="font-family:'Barlow Condensed'; font-size:9px; font-weight:700; letter-spacing:1.5px; color:rgba(248,113,113,0.5); margin-top:3px;">LOSSES</div>
+            </div>
+            <div style="flex:1; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:6px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'Barlow Condensed'; font-size:18px; font-weight:900; color:white; line-height:1.3;">{{ goalRecord }}</div>
+              <div style="font-family:'Barlow Condensed'; font-size:9px; font-weight:700; letter-spacing:1.5px; color:rgba(255,255,255,0.3); margin-top:3px;">GF / GA</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.06); margin:0 20px; flex-shrink:0;"></div>
+
+        <!-- SQUAD VALUE -->
+        <div style="padding:14px 20px; flex-shrink:0;">
+          <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.3); margin-bottom:6px;">SQUAD MARKET VALUE</div>
+          <div style="font-family:'Barlow Condensed'; font-size:34px; font-weight:900; color:{{ tierColor }}; line-height:1; margin-bottom:8px;">{{ squadValue }}</div>
+          <div style="height:4px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden;">
+            <div style="height:100%; background:{{ tierColor }}; width:{{ valueBarPct }}; border-radius:2px;"></div>
+          </div>
+          <div style="font-family:'Barlow'; font-size:10px; color:rgba(255,255,255,0.2); margin-top:4px;">{{ highestValueLine }}</div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.06); margin:0 20px; flex-shrink:0;"></div>
+
+        <!-- TOP 3 PLAYERS -->
+        <div style="padding:14px 20px; flex-shrink:0;">
+          <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.3); margin-bottom:10px;">TOP 3 MOST VALUABLE PLAYERS</div>
+          <sc-for list="{{ players }}" as="player" hint-placeholder-count="3">
+            <div style="display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="width:24px; height:24px; border-radius:50%; background:rgba(240,184,64,0.12); border:1px solid rgba(240,184,64,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <span style="font-family:'Barlow Condensed'; font-size:12px; font-weight:900; color:#f0b840;">{{ player.rank }}</span>
+              </div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-family:'Barlow Condensed'; font-size:14px; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ player.name }}</div>
+                <div style="font-family:'Barlow'; font-size:10px; color:rgba(255,255,255,0.35);">{{ player.club }}</div>
+              </div>
+              <div style="font-family:'Barlow Condensed'; font-size:13px; font-weight:700; color:{{ tierColor }}; flex-shrink:0;">{{ player.val }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.06); margin:0 20px; flex-shrink:0;"></div>
+
+        <!-- COUNTRY FACTS -->
+        <div style="padding:14px 20px 28px; flex-shrink:0;">
+          <div style="font-family:'Barlow Condensed'; font-size:10px; font-weight:600; letter-spacing:2.5px; color:rgba(255,255,255,0.3); margin-bottom:10px;">COUNTRY FACTS</div>
+          <sc-for list="{{ facts }}" as="fact" hint-placeholder-count="5">
+            <div style="padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+              <div style="font-family:'Barlow Condensed'; font-size:9px; font-weight:700; letter-spacing:2px; color:{{ tierColor }}; margin-bottom:3px; text-transform:uppercase;">{{ fact.label }}</div>
+              <div style="font-family:'Barlow'; font-size:12px; color:rgba(255,255,255,0.62); line-height:1.5;">{{ fact.value }}</div>
+            </div>
+          </sc-for>
+          <div style="margin-top:16px; font-family:'Barlow'; font-size:10px; color:rgba(255,255,255,0.18); text-align:center;">Source: FIFA · Transfermarkt · General Knowledge</div>
+        </div>
+
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { selected: null };
+
+  TEAMS = {};
+  ISO_MAP = {};
+  META = { highestSquadValueM: 1520, highestSquadValueLabel: '' };
+
+  tierColor(val) {
+    if (val >= 500) return '#f0b840';
+    if (val >= 200) return '#d07c10';
+    if (val >= 100) return '#a85c18';
+    return '#6e3e18';
+  }
+  hoverColor(val) {
+    if (val >= 500) return '#ffd060';
+    if (val >= 200) return '#f09020';
+    if (val >= 100) return '#cc7030';
+    return '#9a5a28';
+  }
+
+  zoomIn()    { if (this.svg && this.zb) this.svg.transition().duration(300).call(this.zb.scaleBy, 1.65); }
+  zoomOut()   { if (this.svg && this.zb) this.svg.transition().duration(300).call(this.zb.scaleBy, 0.6); }
+  resetZoom() { if (this.svg && this.zb) this.svg.transition().duration(500).call(this.zb.transform, d3.zoomIdentity); }
+
+  componentDidMount() {
+    const self = this;
+    Promise.all([
+      fetch('./data.json').then(r => r.json()),
+      d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'),
+    ]).then(([data, world]) => {
+      self.TEAMS = data.teams;
+      self.ISO_MAP = Object.fromEntries(Object.entries(data.isoMap).map(([k, v]) => [+k, v]));
+      self.META = data.meta;
+      self.worldData = world;
+      self.renderMap();
+    });
+    this._onResize = () => { if (this.worldData) this.renderMap(); };
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  componentDidUpdate(pp, ps) { if (ps.selected !== this.state.selected) this.updateHighlight(); }
+
+  renderMap() {
+    const container = document.getElementById('map-container');
+    if (!container) return;
+    const { width, height } = container.getBoundingClientRect();
+    if (!width || !height) return;
+
+    d3.select('#map-container svg').remove();
+    d3.select('#map-container .tt').remove();
+
+    const svg = d3.select('#map-container').append('svg')
+      .attr('width', width).attr('height', height).style('display','block');
+    this.svg = svg;
+
+    // Background
+    svg.append('rect').attr('width', width).attr('height', height).attr('fill','#0c1828');
+
+    // Zoomable group
+    const g = svg.append('g');
+    this.g = g;
+
+    const scale = Math.min(width / 6.2, height / 3.2);
+    const proj = d3.geoNaturalEarth1().scale(scale).translate([width / 2, height / 2 + height * 0.04]);
+    const path = d3.geoPath().projection(proj);
+    this.pathFn = path;
+
+    // Graticule
+    g.append('path').datum(d3.geoGraticule()())
+      .attr('d', path).attr('fill','none')
+      .attr('stroke','rgba(255,255,255,0.035)').attr('stroke-width',0.5);
+    // Sphere border
+    g.append('path').datum({type:'Sphere'})
+      .attr('d', path).attr('fill','none')
+      .attr('stroke','rgba(255,255,255,0.07)').attr('stroke-width',0.8);
+
+    const features = topojson.feature(this.worldData, this.worldData.objects.countries).features;
+    const self = this;
+
+    // Tooltip
+    this.tt = d3.select('#map-container').append('div').attr('class','tt')
+      .style('position','absolute').style('pointer-events','none')
+      .style('background','rgba(6,9,15,0.93)').style('border','1px solid rgba(240,184,64,0.4)')
+      .style('color','#f0b840').style('padding','5px 13px').style('border-radius','4px')
+      .style('font-family','Barlow Condensed,sans-serif').style('font-size','13px')
+      .style('font-weight','700').style('letter-spacing','1.5px').style('text-transform','uppercase')
+      .style('opacity','0').style('transition','opacity 0.1s').style('z-index','20').style('white-space','nowrap');
+
+    this.cpaths = g.selectAll('.cp').data(features).enter().append('path')
+      .attr('class','cp').attr('d', path)
+      .attr('fill', d => { const k = self.ISO_MAP[+d.id]; return k ? self.tierColor(self.TEAMS[k].val) : '#101e30'; })
+      .attr('stroke','#07101e').attr('stroke-width',0.5)
+      .style('cursor', d => self.ISO_MAP[+d.id] ? 'pointer' : 'default')
+      .on('click', (event, d) => {
+        const k = self.ISO_MAP[+d.id];
+        if (k) { self.setState({ selected: k }); self.tt.style('opacity','0'); }
+      })
+      .on('mouseover', function(event, d) {
+        const k = self.ISO_MAP[+d.id];
+        if (!k) return;
+        if (k !== self.state.selected) d3.select(this).attr('fill', self.hoverColor(self.TEAMS[k].val)).attr('stroke','rgba(240,184,64,0.5)').attr('stroke-width',1);
+        self.tt.style('opacity','1').text(self.TEAMS[k].name);
+      })
+      .on('mousemove', function(event) { self.tt.style('left',(event.offsetX+16)+'px').style('top',(event.offsetY-14)+'px'); })
+      .on('mouseout', function(event, d) {
+        const k = self.ISO_MAP[+d.id];
+        if (!k) return;
+        if (k !== self.state.selected) d3.select(this).attr('fill', self.tierColor(self.TEAMS[k].val)).attr('stroke','#07101e').attr('stroke-width',0.5);
+        self.tt.style('opacity','0');
+      });
+
+    // Zoom behavior
+    const zb = d3.zoom().scaleExtent([0.7, 14])
+      .on('zoom', event => g.attr('transform', event.transform));
+    svg.call(zb);
+    this.zb = zb;
+
+    // Cape Verde: islands too small for 110m atlas — render explicit marker
+    const cpvPt = proj([-24, 16]);
+    const cpvG = g.append('g').attr('class','cpv-marker').style('cursor','pointer')
+      .on('click', () => { self.setState({ selected: 'CPV' }); self.tt.style('opacity','0'); })
+      .on('mouseover', function() {
+        if (self.state.selected !== 'CPV') {
+          d3.select(this).select('circle').attr('fill', self.hoverColor(30)).attr('stroke','rgba(240,184,64,0.5)').attr('stroke-width',1.5);
+        }
+        self.tt.style('opacity','1').text('Cape Verde');
+      })
+      .on('mousemove', function(event) { self.tt.style('left',(event.offsetX+16)+'px').style('top',(event.offsetY-14)+'px'); })
+      .on('mouseout', function() {
+        if (self.state.selected !== 'CPV') {
+          d3.select(this).select('circle').attr('fill', self.tierColor(30)).attr('stroke','rgba(110,62,24,0.5)').attr('stroke-width',1);
+        }
+        self.tt.style('opacity','0');
+      });
+
+    cpvG.append('circle')
+      .attr('cx', cpvPt[0]).attr('cy', cpvPt[1]).attr('r', 6)
+      .attr('fill', self.tierColor(30))
+      .attr('stroke','rgba(110,62,24,0.5)').attr('stroke-width',1);
+
+    cpvG.append('text')
+      .attr('x', cpvPt[0] + 9).attr('y', cpvPt[1] + 4)
+      .attr('fill','rgba(255,255,255,0.45)').attr('pointer-events','none')
+      .attr('font-family','Barlow Condensed,sans-serif').attr('font-size','9px')
+      .attr('font-weight','700').attr('letter-spacing','1px').text('CPV');
+
+    this.cpvMarker = cpvG;
+
+    this.updateHighlight();
+  }
+
+  updateHighlight() {
+    if (!this.cpaths) return;
+    const self = this;
+    this.cpaths.each(function(d) {
+      const k = self.ISO_MAP[+d.id];
+      if (!k) return;
+      const sel = self.state.selected === k;
+      d3.select(this).transition().duration(180)
+        .attr('fill', sel ? '#ffd700' : self.tierColor(self.TEAMS[k].val))
+        .attr('stroke', sel ? 'rgba(255,215,0,0.7)' : '#07101e')
+        .attr('stroke-width', sel ? 2 : 0.5);
+    });
+    // Cape Verde dot marker
+    if (this.cpvMarker) {
+      const sel = this.state.selected === 'CPV';
+      this.cpvMarker.select('circle').transition().duration(180)
+        .attr('fill', sel ? '#ffd700' : this.tierColor(30))
+        .attr('stroke', sel ? 'rgba(255,215,0,0.7)' : 'rgba(110,62,24,0.5)')
+        .attr('stroke-width', sel ? 2 : 1)
+        .attr('r', sel ? 8 : 6);
+    }
+  }
+
+  renderVals() {
+    const { selected } = this.state;
+    const d = selected ? this.TEAMS[selected] : null;
+    const tc = d ? this.tierColor(d.val) : '#f0b840';
+    const isR16 = d && d.status === 'R16';
+    const pct = d ? Math.max(2, Math.round(d.val / this.META.highestSquadValueM * 100)) + '%' : '0%';
+
+    const posMap = { '1st':'1ST PLACE', '2nd':'RUNNER-UP', '3rd':'3RD (BEST)' };
+
+    const gameColor = r => r === 'W' ? { bgColor:'rgba(74,222,128,0.18)', txtColor:'#4ade80' }
+                        : r === 'L' ? { bgColor:'rgba(248,113,113,0.18)', txtColor:'#f87171' }
+                        : { bgColor:'rgba(250,204,21,0.15)', txtColor:'#facc15' };
+
+    const groupGames = d ? d.games.map(g => {
+      const result = g.gf > g.ga ? 'W' : g.gf < g.ga ? 'L' : 'D';
+      return { ...g, result, score: g.gf + '–' + g.ga, ...gameColor(result) };
+    }) : [];
+
+    const r32Result = d ? (isR16 ? 'W' : 'L') : '';
+    const r32Colors = r32Result === 'W' ? gameColor('W') : gameColor('L');
+    const rg = d ? d.r32Game : null;
+    const r32ScoreStr = rg ? rg.gf + '–' + rg.ga + (rg.note ? ' ('+rg.note+')' : '') : '';
+
+    const facts = d ? [
+      { label:'CAPITAL',           value: d.facts.capital   },
+      { label:'GEOGRAPHICAL INTEREST', value: d.facts.geo   },
+      { label:'HISTORICAL MILESTONE',  value: d.facts.history },
+      { label:'CULTURE & SOCIETY',     value: d.facts.society },
+      { label:'POPULAR CUISINE',       value: d.facts.cuisine },
+    ] : [];
+
+    const players = d ? d.players.map((p, i) => ({ ...p, rank: i + 1 })) : [];
+    const flagUrl = d ? 'https://flagcdn.com/w160/' + d.iso2 + '.png' : '';
+
+    return {
+      hasCountry: !!d,
+      noCountry: !d,
+      flagUrl,
+      countryName: d ? d.name : '',
+      countryGroup: d ? d.group : '',
+      countryPosLabel: d ? (posMap[d.pos] || d.pos) : '',
+      capitalLine: d ? 'CAPITAL: ' + d.facts.capital : '',
+      wins: d ? d.w : '', draws: d ? d.d : '', losses: d ? d.l : '',
+      goalRecord: d ? d.gf + ' / ' + d.ga : '',
+      squadValue: d ? d.vLabel : '',
+      tierColor: tc, valueBarPct: pct,
+      highestValueLine: 'Relative to highest (' + this.META.highestSquadValueLabel + ')',
+      r32BadgeBg:    isR16 ? 'rgba(20,83,45,0.6)' : 'rgba(127,29,29,0.5)',
+      r32BadgeColor: isR16 ? '#4ade80' : '#f87171',
+      r32BadgeLabel: isR16 ? 'ROUND OF 16 · ADVANCING' : 'ELIMINATED · ROUND OF 32',
+      groupGames,
+      r32Result, r32Opp: rg ? rg.opp : '', r32ScoreStr,
+      r32BgColor: r32Colors.bgColor, r32TxtColor: r32Colors.txtColor,
+      facts, players,
+      zoomIn:    () => this.zoomIn(),
+      zoomOut:   () => this.zoomOut(),
+      resetZoom: () => this.resetZoom(),
+      closePanel: () => this.setState({ selected: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>
