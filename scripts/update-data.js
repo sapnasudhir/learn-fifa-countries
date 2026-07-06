@@ -29,6 +29,9 @@ const API_BASE = 'https://api.football-data.org/v4';
 
 const GROUP_STAGE_NAMES = ['GROUP_STAGE'];
 
+const MAX_FETCH_ATTEMPTS = 4;
+const RETRYABLE_STATUSES = new Set([429, 500, 502, 503, 504]);
+
 const STAGE_ORDER = ['R32', 'R16', 'QF', 'SF', 'F'];
 const STAGE_API_NAMES = {
   R32: ['LAST_32'],
@@ -55,6 +58,10 @@ const NAME_OVERRIDES = {
   CIV: 'Ivory Coast',
 };
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function normalize(s) {
   return s
     .toLowerCase()
@@ -78,14 +85,47 @@ function buildTeamMatcher(teams) {
 }
 
 async function fetchMatches(apiKey) {
-  const res = await fetch(`${API_BASE}/competitions/${COMPETITION_CODE}/matches`, {
-    headers: { 'X-Auth-Token': apiKey },
-  });
-  if (!res.ok) {
-    throw new Error(`football-data.org request failed: ${res.status} ${await res.text()}`);
+  const url = `${API_BASE}/competitions/${COMPETITION_CODE}/matches`;
+
+  for (let attempt = 1; attempt <= MAX_FETCH_ATTEMPTS; attempt++) {
+    let res;
+    try {
+      res = await fetch(url, { headers: { 'X-Auth-Token': apiKey } });
+    } catch (err) {
+      if (attempt === MAX_FETCH_ATTEMPTS) throw err;
+      console.warn(`Attempt ${attempt}/${MAX_FETCH_ATTEMPTS} errored (${err.message}), retrying...`);
+      await sleep(backoffMs(attempt));
+      continue;
+    }
+
+    if (res.ok) {
+      const body = await res.json();
+      return body.matches || [];
+    }
+
+    const bodyText = await res.text();
+    const message = `football-data.org request failed: ${res.status} ${bodyText}`;
+    if (!RETRYABLE_STATUSES.has(res.status) || attempt === MAX_FETCH_ATTEMPTS) {
+      throw new Error(message);
+    }
+    console.warn(`Attempt ${attempt}/${MAX_FETCH_ATTEMPTS} got ${res.status}, retrying...`);
+    await sleep(retryDelayMs(res, attempt));
   }
-  const body = await res.json();
-  return body.matches || [];
+}
+
+// Exponential backoff (2s, 4s, 8s, ...) used when there's no Retry-After to honor.
+function backoffMs(attempt) {
+  return Math.min(2000 * 2 ** (attempt - 1), 30000);
+}
+
+// Prefer the server's Retry-After (seconds) if present, else fall back to backoff.
+// Clamped to 30s so a large/bogus value can't stall the CI job.
+function retryDelayMs(res, attempt) {
+  const retryAfter = parseInt(res.headers.get('retry-after'), 10);
+  if (Number.isFinite(retryAfter) && retryAfter > 0) {
+    return Math.min(retryAfter * 1000, 30000);
+  }
+  return backoffMs(attempt);
 }
 
 function resultNote(match) {

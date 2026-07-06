@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # The tournament Final is played July 19, 2026 -- cron has no built-in end date, so
       # gate the scheduled trigger here instead of leaving it running (and burning free-tier
@@ -48,7 +50,15 @@ jobs:
           if ! git diff --quiet -- data.json; then
             git add data.json
             git commit -m "Update live match data"
-            git push
+            for i in 1 2 3; do
+              git pull --rebase origin "$GITHUB_REF_NAME" && git push origin "HEAD:$GITHUB_REF_NAME" && break
+              echo "Push attempt $i failed (likely non-fast-forward); retrying after pull --rebase..." >&2
+              if [ "$i" = "3" ]; then
+                echo "Giving up after 3 push attempts." >&2
+                exit 1
+              fi
+              sleep $((i * 5))
+            done
           else
             echo "No changes to commit."
           fi
