@@ -63,7 +63,8 @@
           "ga": 2,
           "note": "AET"
         }
-      ]
+      ],
+      "nextOpponent": "Egypt"
     },
     "AUS": {
       "name": "Australia",
@@ -662,7 +663,8 @@
           "gf": 1,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "Switzerland"
     },
     "CIV": {
       "name": "Côte d'Ivoire",
@@ -987,7 +989,8 @@
           "ga": 3,
           "note": "pens"
         }
-      ]
+      ],
+      "nextOpponent": "Argentina"
     },
     "ENG": {
       "name": "England",
@@ -1057,7 +1060,8 @@
           "gf": 3,
           "ga": 2
         }
-      ]
+      ],
+      "nextOpponent": "Norway"
     },
     "FRA": {
       "name": "France",
@@ -1127,7 +1131,8 @@
           "gf": 1,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "Morocco"
     },
     "GER": {
       "name": "Germany",
@@ -1465,7 +1470,8 @@
           "gf": 3,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "France"
     },
     "NED": {
       "name": "Netherlands",
@@ -1601,7 +1607,8 @@
           "gf": 2,
           "ga": 1
         }
-      ]
+      ],
+      "nextOpponent": "England"
     },
     "PAR": {
       "name": "Paraguay",
@@ -1737,7 +1744,8 @@
           "gf": 2,
           "ga": 1
         }
-      ]
+      ],
+      "nextOpponent": "Spain"
     },
     "SEN": {
       "name": "Senegal",
@@ -1932,7 +1940,8 @@
           "gf": 3,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "Portugal"
     },
     "SWE": {
       "name": "Sweden",
@@ -2061,7 +2070,8 @@
           "gf": 2,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "Colombia"
     },
     "USA": {
       "name": "United States",
