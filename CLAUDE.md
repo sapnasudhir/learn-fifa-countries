@@ -15,7 +15,7 @@ Live deployment: `https://sapnasudhir.github.io/learn-fifa-countries/` (GitHub P
 - `FIFA 2026 Round of 32 Standalone.html` — the app shell. Committed and deployed as-is, with no build step. Fetches `data.json` at runtime instead of holding match data inline (see below).
 - `data.json` — `TEAMS`/`ISO_MAP` data, extracted out of the bundle. Plain JSON, hand-editable.
 - `scripts/update-data.js` — pulls live scores/results from football-data.org and merges them into `data.json`. Run by the GitHub Actions workflow below; not part of the page itself.
-- `.github/workflows/update-data.yml` — scheduled job (every 30 min) that runs the script above and commits `data.json` if it changed. Requires a `FOOTBALL_DATA_API_KEY` repo secret.
+- `.github/workflows/update-data.yml` — scheduled job (every 2 hours, 11am-9pm Central Time) that runs the script above and commits `data.json` if it changed. Requires a `FOOTBALL_DATA_API_KEY` repo secret.
 - `index.html` — redirect shim so the bare root URL lands on the file above. Not part of the design; don't touch unless the target filename changes.
 - `.nojekyll` — empty marker file, disables Jekyll on GitHub Pages.
 - `README.md` — handoff doc: design tokens, deployment, and the data-update situation.
