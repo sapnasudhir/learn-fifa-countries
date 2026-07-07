@@ -20,6 +20,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.DATA_BOT_PAT }}
 
       # The tournament Final is played July 19, 2026 -- cron has no built-in end date, so
       # gate the scheduled trigger here instead of leaving it running (and burning free-tier
