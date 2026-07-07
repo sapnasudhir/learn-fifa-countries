@@ -625,7 +625,7 @@
       "ga": 1,
       "val": 305,
       "vLabel": "€305M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Uzbekistan",
@@ -673,9 +673,16 @@
           "opp": "Ghana",
           "gf": 1,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "Switzerland",
+          "gf": 1,
+          "ga": 2,
+          "note": "pens"
         }
       ],
-      "nextOpponent": "Switzerland"
+      "eliminatedIn": "R16"
     },
     "CIV": {
       "name": "Côte d'Ivoire",
@@ -2050,7 +2057,7 @@
       "ga": 3,
       "val": 200,
       "vLabel": "€200M",
-      "status": "R16",
+      "status": "QF",
       "games": [
         {
           "opp": "Qatar",
@@ -2098,9 +2105,15 @@
           "opp": "Algeria",
           "gf": 2,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "Colombia",
+          "gf": 2,
+          "ga": 1,
+          "note": "pens"
         }
-      ],
-      "nextOpponent": "Colombia"
+      ]
     },
     "USA": {
       "name": "United States",
