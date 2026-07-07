@@ -210,7 +210,7 @@
       "ga": 2,
       "val": 420,
       "vLabel": "€420M",
-      "status": "R16",
+      "status": "QF",
       "games": [
         {
           "opp": "Egypt",
@@ -259,9 +259,15 @@
           "gf": 3,
           "ga": 2,
           "note": "AET"
+        },
+        {
+          "stage": "R16",
+          "opp": "United States",
+          "gf": 4,
+          "ga": 1
         }
       ],
-      "nextOpponent": "United States"
+      "nextOpponent": "Spain"
     },
     "BIH": {
       "name": "Bosnia & Herz.",
@@ -1952,7 +1958,8 @@
           "gf": 1,
           "ga": 0
         }
-      ]
+      ],
+      "nextOpponent": "Belgium"
     },
     "SWE": {
       "name": "Sweden",
@@ -2097,7 +2104,7 @@
       "ga": 4,
       "val": 200,
       "vLabel": "€200M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "Paraguay",
@@ -2145,9 +2152,15 @@
           "opp": "Bosnia-Herzegovina",
           "gf": 2,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "Belgium",
+          "gf": 1,
+          "ga": 4
         }
       ],
-      "nextOpponent": "Belgium"
+      "eliminatedIn": "R16"
     }
   },
   "ISO_MAP": {
