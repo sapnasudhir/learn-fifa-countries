@@ -20,6 +20,20 @@ Live deployment: `https://sapnasudhir.github.io/learn-fifa-countries/` (GitHub P
 - `.nojekyll` — empty marker file, disables Jekyll on GitHub Pages.
 - `README.md` — handoff doc: design tokens, deployment, and the data-update situation.
 
+## Git workflow: branch + PR, not direct pushes to `main`
+
+`main` has branch protection requiring a pull request before merging (repo admins can bypass, no required status checks yet). For any code/design change:
+
+1. `git checkout -b <short-name>`
+2. Commit your change(s) there.
+3. `git push -u origin <short-name>`
+4. `gh pr create`
+5. Once the user approves, `gh pr merge --squash --delete-branch`
+
+Squash-merge is the only merge strategy enabled on this repo (merge-commit and rebase-merge are both disabled), and merged branches auto-delete on GitHub.
+
+**Exception:** the scheduled data-update workflow (`.github/workflows/update-data.yml`) still pushes `data.json` changes straight to `main` on every run — it authenticates with the `DATA_BOT_PAT` repo secret (a fine-grained PAT belonging to the repo admin, set via `token:` on its `actions/checkout@v4` step), which is what lets it bypass the PR requirement as an admin-authenticated push. Don't route the bot's routine data commits through a PR.
+
 ## How this file is structured: a self-unpacking bundle
 
 This is a Claude Design "Standalone HTML" export, not a hand-written static page. Structurally:
