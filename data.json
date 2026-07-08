@@ -69,7 +69,8 @@
           "gf": 3,
           "ga": 2
         }
-      ]
+      ],
+      "nextOpponent": "Switzerland"
     },
     "AUS": {
       "name": "Australia",
@@ -2113,7 +2114,8 @@
           "ga": 3,
           "note": "pens"
         }
-      ]
+      ],
+      "nextOpponent": "Argentina"
     },
     "USA": {
       "name": "United States",
