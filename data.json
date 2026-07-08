@@ -677,8 +677,8 @@
         {
           "stage": "R16",
           "opp": "Switzerland",
-          "gf": 1,
-          "ga": 2,
+          "gf": 3,
+          "ga": 4,
           "note": "pens"
         }
       ],
@@ -2109,8 +2109,8 @@
         {
           "stage": "R16",
           "opp": "Colombia",
-          "gf": 2,
-          "ga": 1,
+          "gf": 4,
+          "ga": 3,
           "note": "pens"
         }
       ]
