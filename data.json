@@ -1101,7 +1101,7 @@
       "ga": 2,
       "val": 1520,
       "vLabel": "€1.52B",
-      "status": "QF",
+      "status": "SF",
       "games": [
         {
           "opp": "Senegal",
@@ -1155,9 +1155,14 @@
           "opp": "Paraguay",
           "gf": 1,
           "ga": 0
+        },
+        {
+          "stage": "QF",
+          "opp": "Morocco",
+          "gf": 2,
+          "ga": 0
         }
-      ],
-      "nextOpponent": "Morocco"
+      ]
     },
     "GER": {
       "name": "Germany",
@@ -1439,7 +1444,7 @@
       "ga": 3,
       "val": 255,
       "vLabel": "€255M",
-      "status": "QF",
+      "status": "OUT",
       "games": [
         {
           "opp": "Brazil",
@@ -1494,9 +1499,15 @@
           "opp": "Canada",
           "gf": 3,
           "ga": 0
+        },
+        {
+          "stage": "QF",
+          "opp": "France",
+          "gf": 0,
+          "ga": 2
         }
       ],
-      "nextOpponent": "France"
+      "eliminatedIn": "QF"
     },
     "NED": {
       "name": "Netherlands",
