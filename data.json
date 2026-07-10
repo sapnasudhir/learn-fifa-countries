@@ -216,7 +216,7 @@
       "ga": 2,
       "val": 420,
       "vLabel": "€420M",
-      "status": "QF",
+      "status": "OUT",
       "games": [
         {
           "opp": "Egypt",
@@ -271,9 +271,15 @@
           "opp": "United States",
           "gf": 4,
           "ga": 1
+        },
+        {
+          "stage": "QF",
+          "opp": "Spain",
+          "gf": 1,
+          "ga": 2
         }
       ],
-      "nextOpponent": "Spain"
+      "eliminatedIn": "QF"
     },
     "BIH": {
       "name": "Bosnia & Herz.",
@@ -1934,7 +1940,7 @@
       "ga": 0,
       "val": 1220,
       "vLabel": "€1.22B",
-      "status": "QF",
+      "status": "SF",
       "games": [
         {
           "opp": "Cape Verde Islands",
@@ -1988,9 +1994,14 @@
           "opp": "Portugal",
           "gf": 1,
           "ga": 0
+        },
+        {
+          "stage": "QF",
+          "opp": "Belgium",
+          "gf": 2,
+          "ga": 1
         }
-      ],
-      "nextOpponent": "Belgium"
+      ]
     },
     "SWE": {
       "name": "Sweden",
