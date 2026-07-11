@@ -1169,7 +1169,7 @@
           "ga": 0
         }
       ],
-      "nextOpponent": "TBD"
+      "nextOpponent": "Spain"
     },
     "GER": {
       "name": "Germany",
@@ -2001,7 +2001,8 @@
           "gf": 2,
           "ga": 1
         }
-      ]
+      ],
+      "nextOpponent": "France"
     },
     "SWE": {
       "name": "Sweden",
