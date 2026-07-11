@@ -1036,7 +1036,7 @@
       "ga": 2,
       "val": 1360,
       "vLabel": "€1.36B",
-      "status": "QF",
+      "status": "R16",
       "games": [
         {
           "opp": "Croatia",
@@ -1084,15 +1084,9 @@
           "opp": "Congo DR",
           "gf": 2,
           "ga": 1
-        },
-        {
-          "stage": "R16",
-          "opp": "Mexico",
-          "gf": 3,
-          "ga": 2
         }
       ],
-      "nextOpponent": "Norway"
+      "nextOpponent": "Mexico"
     },
     "FRA": {
       "name": "France",
@@ -1380,7 +1374,7 @@
       "ga": 0,
       "val": 210,
       "vLabel": "€210M",
-      "status": "OUT",
+      "status": "R16",
       "games": [
         {
           "opp": "South Africa",
@@ -1428,15 +1422,9 @@
           "opp": "Ecuador",
           "gf": 2,
           "ga": 0
-        },
-        {
-          "stage": "R16",
-          "opp": "England",
-          "gf": 2,
-          "ga": 3
         }
       ],
-      "eliminatedIn": "R16"
+      "nextOpponent": "England"
     },
     "MAR": {
       "name": "Morocco",
