@@ -1036,7 +1036,7 @@
       "ga": 2,
       "val": 1360,
       "vLabel": "€1.36B",
-      "status": "R16",
+      "status": "SF",
       "games": [
         {
           "opp": "Croatia",
@@ -1084,6 +1084,13 @@
           "opp": "Congo DR",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "QF",
+          "opp": "Norway",
+          "gf": 2,
+          "ga": 1,
+          "note": "AET"
         }
       ],
       "nextOpponent": "Mexico"
@@ -1583,7 +1590,7 @@
       "ga": 7,
       "val": 500,
       "vLabel": "€500M",
-      "status": "QF",
+      "status": "OUT",
       "games": [
         {
           "opp": "Iraq",
@@ -1637,9 +1644,16 @@
           "opp": "Brazil",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "QF",
+          "opp": "England",
+          "gf": 1,
+          "ga": 2,
+          "note": "AET"
         }
       ],
-      "nextOpponent": "England"
+      "eliminatedIn": "QF"
     },
     "PAR": {
       "name": "Paraguay",
