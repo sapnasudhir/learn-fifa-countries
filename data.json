@@ -76,7 +76,8 @@
           "ga": 1,
           "note": "AET"
         }
-      ]
+      ],
+      "nextOpponent": "England"
     },
     "AUS": {
       "name": "Australia",
@@ -1092,6 +1093,12 @@
           "ga": 1
         },
         {
+          "stage": "R16",
+          "opp": "Mexico",
+          "gf": 3,
+          "ga": 2
+        },
+        {
           "stage": "QF",
           "opp": "Norway",
           "gf": 2,
@@ -1099,7 +1106,7 @@
           "note": "AET"
         }
       ],
-      "nextOpponent": "Mexico"
+      "nextOpponent": "Argentina"
     },
     "FRA": {
       "name": "France",
@@ -1387,7 +1394,7 @@
       "ga": 0,
       "val": 210,
       "vLabel": "€210M",
-      "status": "R16",
+      "status": "OUT",
       "games": [
         {
           "opp": "South Africa",
@@ -1435,9 +1442,15 @@
           "opp": "Ecuador",
           "gf": 2,
           "ga": 0
+        },
+        {
+          "stage": "R16",
+          "opp": "England",
+          "gf": 2,
+          "ga": 3
         }
       ],
-      "nextOpponent": "England"
+      "eliminatedIn": "R16"
     },
     "MAR": {
       "name": "Morocco",
