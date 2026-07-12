@@ -13,7 +13,7 @@
       "ga": 1,
       "val": 807,
       "vLabel": "€807M",
-      "status": "QF",
+      "status": "SF",
       "games": [
         {
           "opp": "Algeria",
@@ -68,9 +68,15 @@
           "opp": "Egypt",
           "gf": 3,
           "ga": 2
+        },
+        {
+          "stage": "QF",
+          "opp": "Switzerland",
+          "gf": 3,
+          "ga": 1,
+          "note": "AET"
         }
-      ],
-      "nextOpponent": "Switzerland"
+      ]
     },
     "AUS": {
       "name": "Australia",
@@ -2084,7 +2090,7 @@
       "ga": 3,
       "val": 200,
       "vLabel": "€200M",
-      "status": "QF",
+      "status": "OUT",
       "games": [
         {
           "opp": "Qatar",
@@ -2139,9 +2145,16 @@
           "gf": 4,
           "ga": 3,
           "note": "pens"
+        },
+        {
+          "stage": "QF",
+          "opp": "Argentina",
+          "gf": 1,
+          "ga": 3,
+          "note": "AET"
         }
       ],
-      "nextOpponent": "Argentina"
+      "eliminatedIn": "QF"
     },
     "USA": {
       "name": "United States",
