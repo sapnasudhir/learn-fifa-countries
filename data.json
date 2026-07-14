@@ -1121,7 +1121,7 @@
       "ga": 2,
       "val": 1520,
       "vLabel": "€1.52B",
-      "status": "SF",
+      "status": "OUT",
       "games": [
         {
           "opp": "Senegal",
@@ -1181,9 +1181,15 @@
           "opp": "Morocco",
           "gf": 2,
           "ga": 0
+        },
+        {
+          "stage": "SF",
+          "opp": "Spain",
+          "gf": 0,
+          "ga": 2
         }
       ],
-      "nextOpponent": "Spain"
+      "eliminatedIn": "SF"
     },
     "GER": {
       "name": "Germany",
@@ -1961,7 +1967,7 @@
       "ga": 0,
       "val": 1220,
       "vLabel": "€1.22B",
-      "status": "SF",
+      "status": "F",
       "games": [
         {
           "opp": "Cape Verde Islands",
@@ -2021,9 +2027,14 @@
           "opp": "Belgium",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "SF",
+          "opp": "France",
+          "gf": 2,
+          "ga": 0
         }
-      ],
-      "nextOpponent": "France"
+      ]
     },
     "SWE": {
       "name": "Sweden",
