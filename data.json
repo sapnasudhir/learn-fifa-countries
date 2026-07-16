@@ -82,7 +82,8 @@
           "gf": 2,
           "ga": 1
         }
-      ]
+      ],
+      "nextOpponent": "Spain"
     },
     "AUS": {
       "name": "Australia",
@@ -2046,7 +2047,7 @@
           "ga": 0
         }
       ],
-      "nextOpponent": "TBD"
+      "nextOpponent": "Argentina"
     },
     "SWE": {
       "name": "Sweden",
