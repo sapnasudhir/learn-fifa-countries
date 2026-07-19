@@ -13,7 +13,7 @@
       "ga": 1,
       "val": 807,
       "vLabel": "€807M",
-      "status": "F",
+      "status": "OUT",
       "games": [
         {
           "opp": "Algeria",
@@ -81,9 +81,16 @@
           "opp": "England",
           "gf": 2,
           "ga": 1
+        },
+        {
+          "stage": "F",
+          "opp": "Spain",
+          "gf": 0,
+          "ga": 1,
+          "note": "AET"
         }
       ],
-      "nextOpponent": "Spain"
+      "eliminatedIn": "F"
     },
     "AUS": {
       "name": "Australia",
@@ -1979,7 +1986,7 @@
       "ga": 0,
       "val": 1220,
       "vLabel": "€1.22B",
-      "status": "F",
+      "status": "CHAMPION",
       "games": [
         {
           "opp": "Cape Verde Islands",
@@ -2045,9 +2052,15 @@
           "opp": "France",
           "gf": 2,
           "ga": 0
+        },
+        {
+          "stage": "F",
+          "opp": "Argentina",
+          "gf": 1,
+          "ga": 0,
+          "note": "AET"
         }
-      ],
-      "nextOpponent": "Argentina"
+      ]
     },
     "SWE": {
       "name": "Sweden",
